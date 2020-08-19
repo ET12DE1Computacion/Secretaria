@@ -43,12 +43,6 @@ dotnet ef database update --project Secretaria.FrontEnd --context SecretariaDbCo
 dotnet ef database update --project Secretaria.FrontEnd --context ApplicationDbContext
 ```
 
-_Y repite_
-
-```
-hasta finalizar
-```
-
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
 ## Despliegue 📦
