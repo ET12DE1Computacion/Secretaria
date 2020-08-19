@@ -8,15 +8,22 @@ _Acá va un párrafo que describa lo que es el proyecto_
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Mira **Despliegue** para conocer como desplegar el proyecto.
+Clonar el repositorio github, desde Github Desktop o ejecutar en la terminal o CMD:
+
+```
+git clone https://github.com/et12de1computacion/secretaria.git
+```
 
 
 ### Pre-requisitos 📋
 
 _Que cosas necesitas para instalar el software y como instalarlas_
 
+- Net Core 3.1.7 (SDK 3.1.401) [descarga](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+
+- Entity Framework Core 3.x, en el CMD o terminal ejecutar el siguiente comando: [ver docs](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
 ```
-Da un ejemplo
+dotnet tool install --global dotnet-ef
 ```
 
 ### Instalación 🔧
@@ -25,8 +32,15 @@ _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener 
 
 _Dí cómo será ese paso_
 
+Para crear las bases de datos mediante Entity Framework:
+
+- Configurar el archivo **appsetting.json** los **connectionString** del servidor de base de datos 
+- Desde el Visual Studio acceder al menu **Herramientas** -> **Gestor de Paquetes Nuget** -> **Consola de Paquetes Nuget** ejecutar los siguientes comandos:
 ```
-Da un ejemplo
+dotnet ef database update --project Secretaria.FrontEnd --context SecretariaDbContext
+```
+```
+dotnet ef database update --project Secretaria.FrontEnd --context ApplicationDbContext
 ```
 
 _Y repite_
