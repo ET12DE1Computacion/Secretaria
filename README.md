@@ -1,6 +1,6 @@
-![.NET Core](https://github.com/ET12DE1Computacion/template/workflows/.NET%20Core/badge.svg?branch=master)
+![.NET Core](https://github.com/ET12DE1Computacion/Secretaria/workflows/.NET%20Core/badge.svg)
 
-# Título del Proyecto
+# Secretaria
 
 _Acá va un párrafo que describa lo que es el proyecto_
 
