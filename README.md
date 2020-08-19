@@ -53,9 +53,9 @@ _Agrega notas adicionales sobre que cosas se debe instalar, configurar y como ha
 
 _Menciona las herramientas y versiones que utilizaste para crear tu proyecto_
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+* [Visual Studio 2019](https://visualstudio.microsoft.com/es/)
+* [Net Core 3.1](https://dotnet.microsoft.com/download)
+* [MySql 5.7](https://dev.mysql.com/downloads/mysql/)
 
 ## Wiki 📖
 
