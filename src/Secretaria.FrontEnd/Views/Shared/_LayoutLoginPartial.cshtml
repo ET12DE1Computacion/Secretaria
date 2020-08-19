@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Secretaria.FrontEnd.Identity.ApplicationUser> UserManager
+
+@if (User.Identity.IsAuthenticated)
+{
+    var user = @UserManager.FindByNameAsync(User.Identity.Name).Result;
+    var photoPath = "/images/" + (user.PathImagen ?? "noimage.jpg");
+    <li class="nav-item">
+        <a class="navbar-brand" href="#">
+            <img src="@photoPath" width="30" height="30" alt="" style="border-radius: 50%">
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="#">@user.NombreCompleto</a>
+    </li>
+    <li class="nav-item">
+        <form asp-controller="Administracion" asp-action="Logout" method="post">
+            <button type="submit" class="nav-link btn btn-link text-dark btnLogout" data-toggle="tooltip" data-placement="bottom" data-original-title="Salir">Salir</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Administracion" asp-action="CrearUsuario">Crear Usuario</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Administracion" asp-action="Login">Login</a>
+    </li>
+}
