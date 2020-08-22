@@ -6,8 +6,6 @@ _Acá va un párrafo que describa lo que es el proyecto_
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
 Clonar el repositorio github, desde Github Desktop o ejecutar en la terminal o CMD:
 
 ```
@@ -17,8 +15,6 @@ git clone https://github.com/et12de1computacion/secretaria.git
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
-
 - Net Core 3.1.7 (SDK 3.1.401) [descarga](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 
 - Entity Framework Core 3.x, en el CMD o terminal ejecutar el siguiente comando: [ver docs](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
@@ -27,10 +23,6 @@ dotnet tool install --global dotnet-ef
 ```
 
 ### Instalación 🔧
-
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
-_Dí cómo será ese paso_
 
 Para crear las bases de datos mediante Entity Framework:
 
@@ -43,8 +35,6 @@ dotnet ef database update --project Secretaria.FrontEnd --context SecretariaDbCo
 dotnet ef database update --project Secretaria.FrontEnd --context ApplicationDbContext
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
 ## Despliegue 📦
 
 _Agrega notas adicionales sobre que cosas se debe instalar, configurar y como hacer deploy_
@@ -53,9 +43,9 @@ _Agrega notas adicionales sobre que cosas se debe instalar, configurar y como ha
 
 _Menciona las herramientas y versiones que utilizaste para crear tu proyecto_
 
-* [Visual Studio 2019](https://visualstudio.microsoft.com/es/)
-* [Net Core 3.1](https://dotnet.microsoft.com/download)
-* [MySql 5.7](https://dev.mysql.com/downloads/mysql/)
+* [Visual Studio](https://visualstudio.microsoft.com/es/)
+* [Net Core](https://dotnet.microsoft.com/download)
+* [MySql](https://dev.mysql.com/downloads/mysql/)
 
 ## Wiki 📖
 
