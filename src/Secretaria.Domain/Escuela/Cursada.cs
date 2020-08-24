@@ -6,9 +6,9 @@ namespace Secretaria.Domain.Escuela
 {
     public class Cursada
     {
-        public int Libro { get; set; }
+        public short Libro { get; set; }
 
-        public int Folio { get; set; }
+        public byte Folio { get; set; }
 
         public Alumno Alumno { get; set; }
 

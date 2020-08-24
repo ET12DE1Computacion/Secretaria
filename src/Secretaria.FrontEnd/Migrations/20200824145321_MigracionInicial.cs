@@ -182,8 +182,8 @@ namespace Secretaria.FrontEnd.Migrations
                 name: "Alumno",
                 columns: table => new
                 {
-                    libro = table.Column<int>(nullable: false),
-                    folio = table.Column<int>(nullable: false),
+                    libro = table.Column<short>(nullable: false),
+                    folio = table.Column<byte>(nullable: false),
                     idCursoActual = table.Column<int>(nullable: false),
                     nroDocumento = table.Column<int>(nullable: false),
                     idTipoDocumento = table.Column<byte>(nullable: false)
@@ -209,9 +209,9 @@ namespace Secretaria.FrontEnd.Migrations
                 name: "AptoMedico",
                 columns: table => new
                 {
-                    vencimiento = table.Column<DateTime>(nullable: false),
-                    libro = table.Column<int>(nullable: false),
-                    folio = table.Column<int>(nullable: false)
+                    libro = table.Column<short>(nullable: false),
+                    folio = table.Column<byte>(nullable: false),
+                    vencimiento = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,8 +228,8 @@ namespace Secretaria.FrontEnd.Migrations
                 name: "Cursada",
                 columns: table => new
                 {
-                    libro = table.Column<int>(nullable: false),
-                    folio = table.Column<int>(nullable: false),
+                    libro = table.Column<short>(nullable: false),
+                    folio = table.Column<byte>(nullable: false),
                     inscripcion = table.Column<DateTime>(nullable: false),
                     idCurso = table.Column<int>(nullable: false),
                     cicloLectivo = table.Column<short>(nullable: false)
@@ -255,8 +255,8 @@ namespace Secretaria.FrontEnd.Migrations
                 name: "Falta",
                 columns: table => new
                 {
-                    libro = table.Column<int>(nullable: false),
-                    folio = table.Column<int>(nullable: false),
+                    libro = table.Column<short>(nullable: false),
+                    folio = table.Column<byte>(nullable: false),
                     fecha = table.Column<DateTime>(nullable: false),
                     idTipoFalta = table.Column<byte>(nullable: false),
                     idTipoAusencia = table.Column<byte>(nullable: false),
@@ -297,16 +297,14 @@ namespace Secretaria.FrontEnd.Migrations
                 name: "Seguimiento",
                 columns: table => new
                 {
-                    idSeguimiento = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    libro = table.Column<int>(nullable: false),
-                    folio = table.Column<int>(nullable: false),
-                    observacion = table.Column<string>(maxLength: 250, nullable: false),
-                    fecha = table.Column<DateTime>(type: "Date", nullable: false)
+                    libro = table.Column<short>(nullable: false),
+                    folio = table.Column<byte>(nullable: false),
+                    fecha = table.Column<DateTime>(type: "Date", nullable: false),
+                    observacion = table.Column<string>(maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seguimiento", x => x.idSeguimiento);
+                    table.PrimaryKey("PK_Seguimiento", x => new { x.libro, x.folio, x.fecha });
                     table.ForeignKey(
                         name: "FK_Seguimiento_Alumno_libro_folio",
                         columns: x => new { x.libro, x.folio },
@@ -408,11 +406,6 @@ namespace Secretaria.FrontEnd.Migrations
                 table: "Persona",
                 columns: new[] { "nroDocumento", "idTipoDocumento" },
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Seguimiento_libro_folio",
-                table: "Seguimiento",
-                columns: new[] { "libro", "folio" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_TipoAusencia_tipoAusencia",

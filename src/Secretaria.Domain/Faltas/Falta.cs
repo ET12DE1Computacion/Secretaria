@@ -5,9 +5,9 @@ namespace Secretaria.Domain.Faltas
 {
     public class Falta
     {
-        public int Libro { get; set; }
+        public short Libro { get; set; }
 
-        public int Folio { get; set; }
+        public byte Folio { get; set; }
 
         public DateTime Fecha { get; set; }
 

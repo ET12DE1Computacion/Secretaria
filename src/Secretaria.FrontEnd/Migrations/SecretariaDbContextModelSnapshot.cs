@@ -187,13 +187,13 @@ namespace Secretaria.FrontEnd.Migrations
 
             modelBuilder.Entity("Secretaria.Domain.Escuela.Alumno", b =>
                 {
-                    b.Property<int>("Libro")
+                    b.Property<short>("Libro")
                         .HasColumnName("libro")
-                        .HasColumnType("int");
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("Folio")
+                    b.Property<byte>("Folio")
                         .HasColumnName("folio")
-                        .HasColumnType("int");
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<byte>("IdTipoDocumento")
                         .HasColumnName("idTipoDocumento")
@@ -225,13 +225,13 @@ namespace Secretaria.FrontEnd.Migrations
                         .HasColumnName("vencimiento")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Libro")
+                    b.Property<short>("Libro")
                         .HasColumnName("libro")
-                        .HasColumnType("int");
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("Folio")
+                    b.Property<byte>("Folio")
                         .HasColumnName("folio")
-                        .HasColumnType("int");
+                        .HasColumnType("tinyint unsigned");
 
                     b.HasKey("Vencimiento", "Libro", "Folio");
 
@@ -246,13 +246,13 @@ namespace Secretaria.FrontEnd.Migrations
                         .HasColumnName("inscripcion")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Libro")
+                    b.Property<short>("Libro")
                         .HasColumnName("libro")
-                        .HasColumnType("int");
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("Folio")
+                    b.Property<byte>("Folio")
                         .HasColumnName("folio")
-                        .HasColumnType("int");
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<short>("CicloLectivo")
                         .HasColumnName("cicloLectivo")
@@ -293,22 +293,17 @@ namespace Secretaria.FrontEnd.Migrations
 
             modelBuilder.Entity("Secretaria.Domain.Escuela.Seguimiento", b =>
                 {
-                    b.Property<int>("IdSeguimiento")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("idSeguimiento")
-                        .HasColumnType("int");
+                    b.Property<short>("Libro")
+                        .HasColumnName("libro")
+                        .HasColumnType("smallint");
+
+                    b.Property<byte>("Folio")
+                        .HasColumnName("folio")
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnName("fecha")
                         .HasColumnType("Date");
-
-                    b.Property<int>("Folio")
-                        .HasColumnName("folio")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Libro")
-                        .HasColumnName("libro")
-                        .HasColumnType("int");
 
                     b.Property<string>("Observacion")
                         .IsRequired()
@@ -316,9 +311,7 @@ namespace Secretaria.FrontEnd.Migrations
                         .HasColumnType("varchar(250) CHARACTER SET utf8mb4")
                         .HasMaxLength(250);
 
-                    b.HasKey("IdSeguimiento");
-
-                    b.HasIndex("Libro", "Folio");
+                    b.HasKey("Libro", "Folio", "Fecha");
 
                     b.ToTable("Seguimiento");
                 });
@@ -353,13 +346,13 @@ namespace Secretaria.FrontEnd.Migrations
 
             modelBuilder.Entity("Secretaria.Domain.Faltas.Falta", b =>
                 {
-                    b.Property<int>("Libro")
+                    b.Property<short>("Libro")
                         .HasColumnName("libro")
-                        .HasColumnType("int");
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("Folio")
+                    b.Property<byte>("Folio")
                         .HasColumnName("folio")
-                        .HasColumnType("int");
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnName("fecha")
