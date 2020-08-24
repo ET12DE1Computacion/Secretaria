@@ -13,6 +13,8 @@ namespace Secretaria.Domain.Escuela
         
         public IEnumerable<Alumno> Alumnos { get; set; }
 
+        public IEnumerable<Falta> Faltas { get; set; }
+
         public IEnumerable<AsistenciaCurso> AsistenciaCurso { get; set; }
 
         public Curso()
@@ -20,6 +22,8 @@ namespace Secretaria.Domain.Escuela
             Alumnos = new List<Alumno>();
 
             AsistenciaCurso = new List<AsistenciaCurso>();
+
+            Faltas = new List<Falta>();
         }
     }
 }

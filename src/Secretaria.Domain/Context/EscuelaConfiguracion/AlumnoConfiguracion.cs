@@ -12,6 +12,9 @@ namespace Secretaria.Domain.Context.EscuelaConfiguracion
 
             mb.HasKey(x => new { x.Libro, x.Folio });
 
+            mb.HasIndex(x => new { x.Libro, x.Folio })
+                .IsUnique();
+
             mb.Property(x => x.Libro)
                 .HasColumnName("libro")
                 .IsRequired();

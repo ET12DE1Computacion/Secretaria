@@ -17,7 +17,7 @@ namespace Secretaria.Domain.Faltas
 
         public TipoAusencia TipoAusencia { get; set; }
 
-        public Cursada Cursada { get; set; }
+        public Curso Curso { get; set; }
 
         public float Valor { get; set; }
 

@@ -12,6 +12,9 @@ namespace Secretaria.Domain.Context.DatosPersonalesConfiguracion
 
             mb.HasKey(x => new { x.NroDocumento, x.IdTipoDocumento });
 
+            mb.HasIndex(x => new { x.NroDocumento, x.IdTipoDocumento })
+                .IsUnique();
+
             mb.Property(x => x.NroDocumento)
                 .HasColumnName("nroDocumento")
                 .IsRequired();

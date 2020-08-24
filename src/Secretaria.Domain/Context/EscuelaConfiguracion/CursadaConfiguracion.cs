@@ -10,7 +10,7 @@ namespace Secretaria.Domain.Context.EscuelaConfiguracion
         {
             mb.ToTable("Cursada");
 
-            mb.HasKey(x => x.IdCursada);
+            mb.HasKey(x => new { x.Inscripcion, x.Libro, x.Folio });
 
             mb.HasOne(x => x.Alumno)
                 .WithMany(x => x.Cursadas)

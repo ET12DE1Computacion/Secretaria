@@ -17,7 +17,7 @@ namespace Secretaria.Domain.ADO
 
         public SecretariaDbContext(DbContextOptions<SecretariaDbContext> options) : base(options)
         {
-
+            
         }
 
         //Datos personales

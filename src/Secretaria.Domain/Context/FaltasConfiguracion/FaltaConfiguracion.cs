@@ -31,9 +31,9 @@ namespace Secretaria.Domain.Context.FaltasConfiguracion
                 .HasForeignKey("idTipoAusencia")
                 .IsRequired();
 
-            mb.HasOne(x => x.Cursada)
+            mb.HasOne(x => x.Curso)
                 .WithMany(x => x.Faltas)
-                .HasForeignKey("idCursada")
+                .HasForeignKey("idCurso")
                 .IsRequired();
 
             //propiedades
