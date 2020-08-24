@@ -1,8 +1,9 @@
 ﻿using Secretaria.Domain.Faltas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Secretaria.Domain.Escuela;
 
-namespace Secretaria.Domain.ADO.ContextConfiguracion
+namespace Secretaria.Domain.Context.FaltasConfiguracion
 {
     public class FaltaConfiguracion : IEntityTypeConfiguration<Falta>
     {
@@ -12,24 +13,20 @@ namespace Secretaria.Domain.ADO.ContextConfiguracion
             mb.ToTable("Falta");
 
             //primary key
-            mb.HasKey(f => f.IdFalta);
+            mb.HasKey(x => new { x.Libro, x.Folio, x.Fecha });
 
-            mb.Property(f => f.IdFalta)
-                .HasColumnName("idFalta")
-                .IsRequired();
-            
             //foreign key
-            mb.HasOne(f => f.Alumno)
-                .WithMany(x => x.Faltas)
-                .HasForeignKey("idAlumno")
-                .IsRequired();
+            mb.HasOne(x => x.Alumno)
+               .WithMany(x => x.Faltas)
+               .HasForeignKey(x => new { x.Libro, x.Folio })
+               .IsRequired();
 
-            mb.HasOne(f => f.TipoFalta)
+            mb.HasOne(x => x.TipoFalta)
                 .WithMany(x => x.Faltas)
                 .HasForeignKey("idTipoFalta")
                 .IsRequired();
 
-            mb.HasOne(f => f.TipoAusencia)
+            mb.HasOne(x => x.TipoAusencia)
                 .WithMany(x => x.Faltas)
                 .HasForeignKey("idTipoAusencia")
                 .IsRequired();
@@ -40,15 +37,23 @@ namespace Secretaria.Domain.ADO.ContextConfiguracion
                 .IsRequired();
 
             //propiedades
-            mb.Property(f => f.Fecha)
+            mb.Property(x => x.Libro)
+                .HasColumnName("libro")
+                .IsRequired();
+
+            mb.Property(x => x.Folio)
+                .HasColumnName("folio")
+                .IsRequired();
+
+            mb.Property(x => x.Fecha)
                 .HasColumnName("fecha")
                 .IsRequired();
 
-            mb.Property(f => f.ValorFalta)
-                .HasColumnName("valorFalta")
+            mb.Property(x => x.Valor)
+                .HasColumnName("valor")
                 .IsRequired();
 
-            mb.Property(F => F.Justificada)
+            mb.Property(x => x.Justificada)
                 .HasColumnName("justificada")
                 .IsRequired();
         }

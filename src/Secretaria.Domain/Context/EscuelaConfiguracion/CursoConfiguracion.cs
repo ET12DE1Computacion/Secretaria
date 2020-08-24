@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Secretaria.Domain.ADO.ContextConfiguracion
+namespace Secretaria.Domain.Context.EscuelaConfiguracion
 {
     public class CursoConfiguracion : IEntityTypeConfiguration<Curso>
     {
@@ -10,16 +10,18 @@ namespace Secretaria.Domain.ADO.ContextConfiguracion
         {
             mb.ToTable("Curso");
 
-            mb.HasKey(c => c.IdCurso);
+            mb.HasKey(x => x.IdCurso);
 
-            mb.Property(c => c.IdCurso)
-                .HasColumnName("idCurso");
+            mb.Property(x => x.IdCurso)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("idCurso")
+                .IsRequired();
 
-            mb.Property(c => c.Anio)
+            mb.Property(x => x.Anio)
                 .HasColumnName("anio")
                 .IsRequired();
 
-            mb.Property(c => c.Division)
+            mb.Property(x => x.Division)
                 .HasColumnName("division")
                 .IsRequired();
         }

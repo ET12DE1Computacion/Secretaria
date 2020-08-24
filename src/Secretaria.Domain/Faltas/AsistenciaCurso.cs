@@ -12,10 +12,5 @@ namespace Secretaria.Domain.Faltas
         public Curso Curso { get; set; }
         
         public TipoFalta TipoFalta { get; set; }
-
-        public AsistenciaCurso() 
-        {
-        
-        }
     }
 }

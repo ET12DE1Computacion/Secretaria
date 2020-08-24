@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Secretaria.Domain.ADO.ContextConfiguracion
+namespace Secretaria.Domain.Context.FaltasConfiguracion
 {
     public class TipoAusenciaConfiguracion : IEntityTypeConfiguration<TipoAusencia>
     {
@@ -10,20 +10,23 @@ namespace Secretaria.Domain.ADO.ContextConfiguracion
         {
             mb.ToTable("TipoAusencia");
 
-            mb.HasKey(t => t.Id);
-            mb.HasIndex(t => t.Cadena).IsUnique();
+            mb.HasKey(x => x.Id);
 
-            mb.Property(t => t.Id)
+            mb.HasIndex(x => x.Cadena)
+                .IsUnique();
+
+            mb.Property(x => x.Id)
+                .ValueGeneratedOnAdd()
                 .HasColumnName("idTipoAusencia")
                 .IsRequired();
 
-            mb.Property(t => t.Cadena)
+            mb.Property(x => x.Cadena)
                 .HasColumnName("tipoAusencia")
                 .HasMaxLength(30)
                 .IsRequired();
 
-            mb.Property(t => t.ValorFalta)
-                .HasColumnName("valorFalta")
+            mb.Property(x => x.Valor)
+                .HasColumnName("valor")
                 .IsRequired();
         }
     }

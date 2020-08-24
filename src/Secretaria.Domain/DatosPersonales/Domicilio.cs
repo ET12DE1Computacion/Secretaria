@@ -1,4 +1,4 @@
-﻿namespace Secretaria.Domain.InfoPersonal
+﻿namespace Secretaria.Domain.DatosPersonales
 {
     public class Domicilio
     {
@@ -17,12 +17,10 @@
         public string CodigoPostal { get; set; }
         
         public string observacionDomicilio { get; set; }
-        
-        public Domicilio() { }
-        
-        public Domicilio(Localidad localidad)
+
+        public Domicilio()
         {
-            this.Localidad = localidad;
+
         }
     }
 }

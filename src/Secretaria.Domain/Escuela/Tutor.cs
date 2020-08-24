@@ -1,6 +1,5 @@
-﻿using Secretaria.Domain.InfoPersonal;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Secretaria.Domain.DatosPersonales;
+using Secretaria.Domain.Util;
 
 namespace Secretaria.Domain.Escuela
 {

@@ -1,9 +1,10 @@
-﻿
-using Secretaria.Domain.ADO.ContextConfiguracion;
-using Secretaria.Domain.Escuela;
+﻿using Secretaria.Domain.Escuela;
 using Secretaria.Domain.Faltas;
-using Secretaria.Domain.InfoPersonal;
+using Secretaria.Domain.DatosPersonales;
 using Microsoft.EntityFrameworkCore;
+using Secretaria.Domain.Context.DatosPersonalesConfiguracion;
+using Secretaria.Domain.Context.EscuelaConfiguracion;
+using Secretaria.Domain.Context.FaltasConfiguracion;
 
 namespace Secretaria.Domain.ADO
 {
@@ -19,21 +20,39 @@ namespace Secretaria.Domain.ADO
 
         }
 
+        //Datos personales
         public DbSet<Persona> Personas { get; set; }
+
+        public DbSet<TipoDocumento> TipoDocumentos { get; set; }
+        
         public DbSet<Domicilio> Domicilios { get; set; }
+        
         public DbSet<Localidad> Localidades { get; set; }
+        
+        public DbSet<Nacionalidad> Nacionalidades { get; set; }
+
+        //Secretaria
         public DbSet<Alumno> Alumnos { get; set; }
+
         public DbSet<Curso> Cursos { get; set; }
-        internal DbSet<TipoDocumento> TipoDocumentos { get; set; }
-        internal DbSet<Nacionalidad> Nacionalidades { get; set; }
-        internal DbSet<TipoTutor> TipoTutores { get; set; }
-        internal DbSet<Tutor> Tutores { get; set; }
-        internal DbSet<Seguimiento> Seguimientos { get; set; }
+
         public DbSet<Cursada> Cursadas { get; set; }
-        private DbSet<Falta> Falta { get; set; }
+
+        public DbSet<Seguimiento> Seguimientos { get; set; }
+
+        public DbSet<AptoMedico> AptosMedicos { get; set; }
+
+        ////public DbSet<TipoTutor> TipoTutores { get; set; }
+
+        ////public DbSet<Tutor> Tutores { get; set; }
+
+        ////Faltas
         public DbSet<TipoAusencia> TipoAusencias { get; set; }
+
         public DbSet<TipoFalta> TipoFaltas { get; set; }
+
         public DbSet<AsistenciaCurso> AsistenciaCursos { get; set; }
+
         public DbSet<Falta> Faltas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -41,35 +60,40 @@ namespace Secretaria.Domain.ADO
         }
 
         protected override void OnModelCreating(ModelBuilder mb)
-        {           
-            mb.ApplyConfiguration(new LocalidadConfiguracion());
-
-            mb.ApplyConfiguration(new NacionalidadConfiguracion());
+        {   
+            //Datos Personales
+            mb.ApplyConfiguration(new PersonaConfiguracion());
 
             mb.ApplyConfiguration(new TipoDocumentoConfiguracion());
 
             mb.ApplyConfiguration(new DomicilioConfiguracion());
 
-            mb.ApplyConfiguration(new PersonaConfiguracion());
+            mb.ApplyConfiguration(new LocalidadConfiguracion());
+
+            mb.ApplyConfiguration(new NacionalidadConfiguracion());
+
+            //Secretaria
+            mb.ApplyConfiguration(new CursoConfiguracion());
 
             mb.ApplyConfiguration(new CursadaConfiguracion());
 
             mb.ApplyConfiguration(new SeguimientoConfiguracion());
 
-            mb.ApplyConfiguration(new TipoTutorConfiguracion());
-
-            mb.ApplyConfiguration(new TutorConfiguracion());
-
             mb.ApplyConfiguration(new AlumnoConfiguracion());
 
-            mb.ApplyConfiguration(new CursoConfiguracion());
+            mb.ApplyConfiguration(new AptoMedicoConfiguracion());
 
+            ////mb.ApplyConfiguration(new TipoTutorConfiguracion());
+
+            ////mb.ApplyConfiguration(new TutorConfiguracion());
+
+            ////Faltas
             mb.ApplyConfiguration(new AsistenciaCursoConfiguracion());
 
             mb.ApplyConfiguration(new TipoAusenciaConfiguracion());
 
             mb.ApplyConfiguration(new TipoFaltaConfiguracion());
-            
+
             mb.ApplyConfiguration(new FaltaConfiguracion());
 
             base.OnModelCreating(mb);

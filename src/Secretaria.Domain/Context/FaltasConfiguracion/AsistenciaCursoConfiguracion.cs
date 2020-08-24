@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Secretaria.Domain.ADO.ContextConfiguracion
+namespace Secretaria.Domain.Context.FaltasConfiguracion
 {
     public class AsistenciaCursoConfiguracion : IEntityTypeConfiguration<AsistenciaCurso>
     {
@@ -15,6 +15,7 @@ namespace Secretaria.Domain.ADO.ContextConfiguracion
             mb.HasKey(a => a.IdAsistenciaCurso);
 
             mb.Property(a => a.IdAsistenciaCurso)
+                .ValueGeneratedOnAdd()
                 .HasColumnName("idAsistenciaCurso")
                 .IsRequired();
 

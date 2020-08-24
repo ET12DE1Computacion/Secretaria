@@ -1,8 +1,8 @@
-﻿using Secretaria.Domain.InfoPersonal;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Secretaria.Domain.DatosPersonales;
 
-namespace Secretaria.Domain.ADO.ContextConfiguracion
+namespace Secretaria.Domain.Context.DatosPersonalesConfiguracion
 {
     public class PersonaConfiguracion : IEntityTypeConfiguration<Persona>
     {
@@ -10,55 +10,57 @@ namespace Secretaria.Domain.ADO.ContextConfiguracion
         {
             mb.ToTable("Persona");
 
-            mb.HasKey(l => l.IdPersona);
+            mb.HasKey(x => new { x.NroDocumento, x.IdTipoDocumento });
 
-            mb.Property<byte>("idTipoDocumento");
-            mb.HasOne(d => d.TipoDocumento)
+            mb.Property(x => x.NroDocumento)
+                .HasColumnName("nroDocumento")
+                .IsRequired();
+
+            mb.Property(x => x.IdTipoDocumento)
+              .HasColumnName("idTipoDocumento")
+              .IsRequired();
+
+            mb.HasOne(x => x.TipoDocumento)
                 .WithMany()
-                .HasForeignKey("idTipoDocumento")
+                .HasForeignKey(x => x.IdTipoDocumento)
                 .IsRequired();
 
             mb.Property<byte>("idNacionalidad");
-            mb.HasOne(d => d.Nacionalidad)
+
+            mb.HasOne(x => x.Nacionalidad)
                 .WithMany()
                 .HasForeignKey("idNacionalidad")
                 .IsRequired();
 
             mb.Property<int>("idDomicilio");
-            mb.HasOne(d => d.Domicilio)
+
+            mb.HasOne(x => x.Domicilio)
                 .WithMany()
                 .HasForeignKey("idDomicilio")
                 .IsRequired();
 
-            mb.Property(d => d.IdPersona)
-                .HasColumnName("idPersona");
-
-            mb.Property(d => d.NroDocumento)
-                .HasColumnName("nroDocumento")
-                .IsRequired();
-
-            mb.Property(d => d.Nombre)
+            mb.Property(x => x.Nombre)
                 .HasColumnName("nombre")
                 .HasMaxLength(45)
                 .IsRequired();
 
-            mb.Property(d => d.Apellido)
+            mb.Property(x => x.Apellido)
                 .HasColumnName("apellido")
                 .HasMaxLength(45)
                 .IsRequired();
 
-            mb.Property(d => d.Nacimiento)
+            mb.Property(x => x.Nacimiento)
                 .HasColumnName("nacimiento")
                 .HasColumnType("Date")
                 .IsRequired();
 
-            mb.Property(d => d.Telefono1)
+            mb.Property(x => x.Telefono1)
                 .HasColumnName("telelfono1");
 
-            mb.Property(d => d.Telefono2)
+            mb.Property(x => x.Telefono2)
                 .HasColumnName("telefono2");
 
-            mb.Property(d => d.Mail)
+            mb.Property(x => x.Mail)
                 .HasColumnName("mail")
                 .HasMaxLength(60);
         }

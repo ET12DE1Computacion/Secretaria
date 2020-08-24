@@ -1,14 +1,13 @@
 ﻿using Secretaria.Domain.Util;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Secretaria.Domain.Faltas
 {
     public class TipoFalta : TextoSencillo
     {
-        public List<Falta> Faltas { get; set; }
+        public IEnumerable<Falta> Faltas { get; set; }
 
-        public List<AsistenciaCurso> AsistenciaCurso { get; set; }
+        public IEnumerable<AsistenciaCurso> AsistenciaCurso { get; set; }
 
         public TipoFalta()
         {

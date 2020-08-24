@@ -7,9 +7,9 @@ namespace Secretaria.Domain.Faltas
 {
     public class TipoAusencia : TextoSencillo
     {
-        public float ValorFalta { get; set; }
+        public float Valor { get; set; }
 
-        public List<Falta> Faltas { get; set; }
+        public IEnumerable<Falta> Faltas { get; set; }
 
         public TipoAusencia() 
         {

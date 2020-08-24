@@ -1,13 +1,15 @@
 ﻿using Secretaria.Domain.Escuela;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Secretaria.Domain.Faltas
 {
     public class Falta
     {
-        public int IdFalta { get; set; }
+        public int Libro { get; set; }
+
+        public int Folio { get; set; }
+
+        public DateTime Fecha { get; set; }
 
         public Alumno Alumno { get; set; }
 
@@ -17,15 +19,8 @@ namespace Secretaria.Domain.Faltas
 
         public Cursada Cursada { get; set; }
 
-        public DateTime Fecha { get; set; }
-
-        public float ValorFalta { get; set; }
+        public float Valor { get; set; }
 
         public bool Justificada { get; set; } = false;
-
-        public Falta()
-        { 
-
-        }
     }
 }

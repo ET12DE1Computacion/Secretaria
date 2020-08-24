@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Secretaria.Domain.Escuela;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
-namespace Secretaria.Domain.InfoPersonal
+namespace Secretaria.Domain.DatosPersonales
 {
     public class Persona
     {        
-        public int IdPersona { get; set; }
+        public int NroDocumento { get; set; }
+        
+        public byte IdTipoDocumento { get; set; }
+        
+        public virtual TipoDocumento TipoDocumento { get; set; }
         
         public string Nombre { get; set; }
         
@@ -18,17 +24,19 @@ namespace Secretaria.Domain.InfoPersonal
         
         public virtual Nacionalidad Nacionalidad { get; set; }
         
-        public virtual TipoDocumento TipoDocumento { get; set; }
-                
-        public int NroDocumento { get; set; }
-        
         public DateTime Nacimiento { get; set; }
         
         public long? Telefono1 { get; set; }
         
         public long? Telefono2 { get; set; }
-        
-        public Persona() { }
+
+        public IEnumerable<Alumno> Alumnos { get; set; }
+
+        public Persona()
+        {
+            Alumnos = new List<Alumno>();
+        }
+
 
         [NotMapped]
         public byte Edad 

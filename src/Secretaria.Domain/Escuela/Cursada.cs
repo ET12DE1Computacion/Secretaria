@@ -1,14 +1,16 @@
 ﻿using Secretaria.Domain.Faltas;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Secretaria.Domain.Escuela
 {
     public class Cursada
     {
-        public int idCursada { get; set; }
+        public int IdCursada { get; set; }
+
+        public int Libro { get; set; }
+
+        public int Folio { get; set; }
 
         public Alumno Alumno { get; set; }
 
@@ -16,8 +18,8 @@ namespace Secretaria.Domain.Escuela
 
         public short CicloLectivo { get; set; }
 
-        public DateTime Fecha { get; set; }
+        public DateTime Inscripcion { get; set; }
 
-        public List<Falta> Faltas { get; set; }
+        public IEnumerable<Falta> Faltas { get; set; }
     }
 }

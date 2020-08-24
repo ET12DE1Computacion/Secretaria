@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Secretaria.Domain.DatosPersonales;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Secretaria.Domain.InfoPersonal
+namespace Secretaria.Domain.Util
 {
     public abstract class EsPersona
     {        
