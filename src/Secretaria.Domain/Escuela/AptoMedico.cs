@@ -2,14 +2,11 @@
 
 namespace Secretaria.Domain.Escuela
 {
-    public class AptoMedico
+    public class AptoMedico: EsDeAlumno
     {
         public DateTime Vencimiento { get; set; }
-
-        public int Libro { get; set; }
-
-        public int Folio { get; set; }
-
-        public Alumno Alumno { get; set; }
+        public bool EsValido => Vencimiento >= DateTime.Now.Date;
+        public AptoMedico(Alumno alumno, DateTime vencimiento) :
+            base(alumno) => Vencimiento = vencimiento;
     }
 }

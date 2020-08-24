@@ -2,18 +2,17 @@
 
 namespace Secretaria.Domain.Escuela
 {
-    public class Seguimiento
+    public class Seguimiento: EsDeAlumno
     {
-        public int IdSeguimiento { get; set; }
-
-        public int Libro { get; set; }
-
-        public int Folio { get; set; }
-
-        public Alumno Alumno { get; set; }
-        
-        public string Observacion { get; set; }
-        
+        public string Observacion { get; set; }        
         public DateTime Fecha { get; set; }
+        public Seguimiento(Alumno alumno, DateTime fecha, string observacion)
+            :base(alumno)
+        {
+            Fecha = fecha;
+            Observacion = observacion;
+        }
+        public Seguimiento(Alumno alumno, string observacion)
+            : this(alumno, DateTime.Now, observacion) { }
     }
 }

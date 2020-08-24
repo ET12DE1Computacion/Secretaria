@@ -10,7 +10,7 @@ namespace Secretaria.Domain.Context.EscuelaConfiguracion
         {
             mb.ToTable("Seguimiento");
 
-            mb.HasKey(x => x.IdSeguimiento);
+            mb.HasKey(x => new { x.Libro, x.Folio, x.Fecha});
 
             mb.HasOne(x => x.Alumno)
                 .WithMany(x => x.Seguimientos)
@@ -23,11 +23,6 @@ namespace Secretaria.Domain.Context.EscuelaConfiguracion
 
             mb.Property(x => x.Folio)
                 .HasColumnName("folio")
-                .IsRequired();
-
-            mb.Property(x => x.IdSeguimiento)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("idSeguimiento")
                 .IsRequired();
 
             mb.Property(x => x.Observacion)
