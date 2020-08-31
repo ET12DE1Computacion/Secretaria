@@ -22,25 +22,35 @@ namespace Secretaria.FrontEnd.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs();
+            IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs().OrderBy(x => x.Cadena);
+            ViewBag.localidades =  localidades;
 
-            return View("Index", localidades);
-        }
-
-        [HttpGet]
-        public IActionResult AgregarLocalidad()
-        {
-            return View("AgregarLocalidad");
+            return View("Index");
         }
 
         [HttpPost]
-        public IActionResult AgregarArticulo(Localidad localidad)
+        public IActionResult Index(Localidad localidad)
         {
             this.unitOfWork.Localidades.Insert(localidad);
-            // this.unitOfWork.SaveChanges();
+            this.unitOfWork.SaveChanges();
             // IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs();
-
+            
             return RedirectToAction("Index");
         }
+
+        // Revición
+        [HttpPost]
+        public IActionResult Eliminar(int IdL)
+        {
+
+            if (IdL == 0)
+            {
+                IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs();
+                this.unitOfWork.Localidades.Delete(localidades.First(x => x.Id == IdL));
+                this.unitOfWork.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Secretaria</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/Semantic-UI-CSS-master/semantic.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/et12styles.css" />
 </head>
@@ -18,12 +19,21 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
-
                     @* Lyon *@
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Localidad" asp-action="Index">Localidades</a>
-                    </li>
-
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Datos Personales
+                        </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Localidad" asp-action="Index">Localidades</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Nacionalidad" asp-action="Index">Nacionalidades</a>
+                                </li>
+                            </div>
+                     </div>
+                     @* /Lyon *@
                     <partial name="_LayoutMenuPartial" />
                 </ul>
             </div>
@@ -46,6 +56,7 @@
     </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/Semantic-UI-CSS-master/semantic.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

@@ -1,28 +1,117 @@
-@model IEnumerable<Secretaria.Domain.DatosPersonales.Localidad>
+@model Secretaria.Domain.DatosPersonales.Localidad
 <div class="row">
     <div class="col-10">
         <h1 class="text-monospace">Localidad</h1>
     </div>
 </div>
 <br />
+
+<form asp-controller="Localidad" asp-action="Index" method="post">
+    <div class="form-row">
+        <div class="form-group col-6">
+            <input asp-for="Cadena" type="text" placeholder="Localidad" class="form-control" required />
+        </div>
+        <div class="col-0">
+            <input type="submit" class="btn btn-outline-primary" value="Agregar"/>
+        </div>    
+        <div class="col-0">
+            <input type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modEditar" value="Editar"></button>
+        </div>
+        <div class="col-0">
+            <input type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modEliminar" value="Eliminar"></button>
+        </div>  
+    </div>   
+</form>
+
+<br/>
 <table class="table table-bordered table-hover table-sm">
         <thead class="thead-dark">
             <tr>
-                <th>id</th>
                 <th>Localidad</th>
+                <th>accion</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var localidad in Model)
+            @foreach (var localidad in @ViewBag.localidades)
             {
-            <tr>
-                <td>@localidad.Id</td>
-                <td>@localidad.Cadena</td>
-            </tr>
+                <tr>
+                    <td class="col-6">@localidad.Cadena</td>
+                    
+                @* <td>
+                    <form asp-route-id="@localidad.Id" asp-action="Eliminar" method="post">
+                      <input type="submit" class="btn btn-outline-danger" value="Eliminar">
+                    </form>
+                  </td> *@
+                </tr>     
             }
         </tbody>
 </table>
-<div class="form-group col-6">
-    <a role="button" asp-controller="Localidad" asp-action="AgregarLocalidad" class="btn btn-outline-primary">Agregar Localidad</a>
-    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
+<br/>
+<div class="row">
+    <div class="col-10">
+        <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
+    </div>
 </div>
+
+@* Eliminar  *@
+
+<div class="modal fade" id="modEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form asp-action="Eliminar" method="post">
+            <div class="input-group mb-3">
+              <input type="text" placeholder="Localidad" class="form-control" required />
+              <div class="col-0">
+                <input type="submit" class="btn btn-outline-danger" value="Eliminar"/>
+              </div>
+            </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Carcelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@* Editar *@
+
+<div class="modal fade" id="modEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="Editar" method="post">
+
+            <div class="input-group mb-3">
+                <input type="search" class="form-control" placeholder="Localidad" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-danger" type="button" id="button-addon2">Editar</button>
+                </div>
+            </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
