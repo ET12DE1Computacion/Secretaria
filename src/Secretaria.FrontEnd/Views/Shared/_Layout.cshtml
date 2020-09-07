@@ -5,27 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Secretaria</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/Semantic-UI-CSS-master/semantic.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/et12styles.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Secretaria</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
+                @* <ul class="navbar-nav flex-grow-1"> *@
+                <ul class="flex-grow-1 nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-selected="false" asp-controller="Home" asp-action="Index">Secretaria</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            Datos Personales
+                        </a>
+                        <div class="dropdown-menu " >
+                            <a class="dropdown-item" asp-area="" asp-controller="Localidad" asp-action="Index">Localidades</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Nacionalidad" asp-action="Index">Nacionalidades</a>
+                        </div>
+                    </li>
                     <partial name="_LayoutMenuPartial" />
                 </ul>
             </div>
+
             <ul class="navbar-nav nav-right">
                 <partial name="_LayoutLoginPartial" />
             </ul>
         </nav>
     </header>
+
+
     <div class="container-fluid">
 
         <main role="main" class="pb-3">
@@ -40,7 +58,59 @@
     </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/Semantic-UI-CSS-master/semantic.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+    $(document).ready( function () {
+    $('#tableLocalidad').DataTable();
+} );
+</script>
+
+@* BUSQUEDA *@
+<script type="text/javascript">
+    
+    (function(document) {
+      'use strict';
+
+      var LightTableFilter = (function(Arr) {
+
+        var _input;
+
+        function _onInputEvent(e) {
+          _input = e.target;
+          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+          Arr.forEach.call(tables, function(table) {
+            Arr.forEach.call(table.tBodies, function(tbody) {
+              Arr.forEach.call(tbody.rows, _filter);
+            });
+          });
+        }
+
+        function _filter(row) {
+          var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        }
+
+        return {
+          init: function() {
+            var inputs = document.getElementsByClassName('light-table-filter');
+            Arr.forEach.call(inputs, function(input) {
+              input.oninput = _onInputEvent;
+            });
+          }
+        };
+      })(Array.prototype);
+
+      document.addEventListener('readystatechange', function() {
+        if (document.readyState === 'complete') {
+          LightTableFilter.init();
+        }
+      });
+
+    })(document);
+    </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

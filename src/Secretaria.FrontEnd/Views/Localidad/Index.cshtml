@@ -1,0 +1,150 @@
+@model Secretaria.Domain.DatosPersonales.Localidad
+<div class="row">
+    <div class="col-10">
+        <h1 class="text-monospace">Localidad</h1>
+    </div>
+</div>
+<br />
+
+<form asp-action="Index" method="post">
+    <div class="form-row">
+        <div class="form-group col-6">
+            <input asp-for="Cadena" type="text" data-table="order-table" placeholder="Localidad" class="form-control light-table-filter" required />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-outline-primary" value="Agregar"/>
+        </div>
+    </div>
+</form>
+@* class="table table-bordered table-hover table-sm" *@
+<br/>
+@* <input class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search.."> *@
+
+<table class="table table-bordered table-hover table-sm order-table">
+  <thead class="thead-dark">
+      <tr>
+          <th>Localidad</th>
+          <th>Acciones</th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach (var localidad in @ViewBag.localidades)
+      {
+        <tr>
+          <td class="col-6">@localidad.Cadena</td>
+          <td>
+            <div class="btn-group">
+              <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#modEliminar-@localidad.Id" value="Eliminar">
+              <input type="reset" form="formEditar" class="btn btn-warning" data-toggle="modal" data-target="#modEditar-@localidad.Id" value="Editar">
+            </div>
+            @* ELIMINAR *@
+            <div class="modal fade" id="modEliminar-@localidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Eliminar Localidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>                                        
+                  <div class="modal-body">
+                    <div class="alert alert-danger" role="alert">
+                      !Esta seguro de eliminar la Localidad @localidad.Cadena!
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <form asp-action="EliminarLocalidad" asp-route-id="@localidad.Id" method="get">
+                      <input type="submit" class="ui positive button" value="Si ">
+                      <input type="button" class="ui negative button" data-dismiss="modal" value="No">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @* EDITAR *@
+            <div class="modal fade" id="modEditar-@localidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Editar Localidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>                                        
+                  <div class="modal-body">
+                    <div class="alert alert-warning" role="alert">
+                      !Esta seguro de Editar la Localidad @localidad.Cadena!
+                    </div>
+                      <form asp-action="EditarLocalidad" asp-route-id="@localidad.Id" method="post" id="formEditarLocalidad">
+                        <div class="form-row">          
+                          <div class="form-group col-10">
+                            <input asp-for="Cadena" type="text" placeholder="Ingrese nuevo nombre..." class="form-control" required/>
+                          </div>
+                        </div>
+                      </form>
+                  <div class="modal-footer">
+                    <input type="submit" class="ui positive button" form="formEditarLocalidad" value="Guardar">
+                    <input type="button" class="ui negative button" data-dismiss="modal" value="Carcelar">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>     
+      }
+  </tbody>
+</table>
+<br/>
+
+<div class="row">
+    <div class="col-10">
+        <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
+    </div>
+</div>
+
+@* <script type="text/javascript">
+    
+    (function(document) {
+      'use strict';
+
+      var LightTableFilter = (function(Arr) {
+
+        var _input;
+
+        function _onInputEvent(e) {
+          _input = e.target;
+          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+          Arr.forEach.call(tables, function(table) {
+            Arr.forEach.call(table.tBodies, function(tbody) {
+              Arr.forEach.call(tbody.rows, _filter);
+            });
+          });
+        }
+
+        function _filter(row) {
+          var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        }
+
+        return {
+          init: function() {
+            var inputs = document.getElementsByClassName('light-table-filter');
+            Arr.forEach.call(inputs, function(input) {
+              input.oninput = _onInputEvent;
+            });
+          }
+        };
+      })(Array.prototype);
+
+      document.addEventListener('readystatechange', function() {
+        if (document.readyState === 'complete') {
+          LightTableFilter.init();
+        }
+      });
+
+    })(document);
+    </script> *@
+
+
+
+
