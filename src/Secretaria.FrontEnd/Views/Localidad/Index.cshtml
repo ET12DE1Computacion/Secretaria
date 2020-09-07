@@ -6,112 +6,145 @@
 </div>
 <br />
 
-<form asp-controller="Localidad" asp-action="Index" method="post">
+<form asp-action="Index" method="post">
     <div class="form-row">
         <div class="form-group col-6">
-            <input asp-for="Cadena" type="text" placeholder="Localidad" class="form-control" required />
+            <input asp-for="Cadena" type="text" data-table="order-table" placeholder="Localidad" class="form-control light-table-filter" required />
         </div>
-        <div class="col-0">
+        <div>
             <input type="submit" class="btn btn-outline-primary" value="Agregar"/>
-        </div>    
-        <div class="col-0">
-            <input type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modEditar" value="Editar"></button>
         </div>
-        <div class="col-0">
-            <input type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modEliminar" value="Eliminar"></button>
-        </div>  
-    </div>   
+    </div>
 </form>
-
+@* class="table table-bordered table-hover table-sm" *@
 <br/>
-<table class="table table-bordered table-hover table-sm">
-        <thead class="thead-dark">
-            <tr>
-                <th>Localidad</th>
-                <th>accion</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var localidad in @ViewBag.localidades)
-            {
-                <tr>
-                    <td class="col-6">@localidad.Cadena</td>
-                    
-                @* <td>
-                    <form asp-route-id="@localidad.Id" asp-action="Eliminar" method="post">
-                      <input type="submit" class="btn btn-outline-danger" value="Eliminar">
+@* <input class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search.."> *@
+
+<table class="table table-bordered table-hover table-sm order-table">
+  <thead class="thead-dark">
+      <tr>
+          <th>Localidad</th>
+          <th>Acciones</th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach (var localidad in @ViewBag.localidades)
+      {
+        <tr>
+          <td class="col-6">@localidad.Cadena</td>
+          <td>
+            <div class="btn-group">
+              <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#modEliminar-@localidad.Id" value="Eliminar">
+              <input type="reset" form="formEditar" class="btn btn-warning" data-toggle="modal" data-target="#modEditar-@localidad.Id" value="Editar">
+            </div>
+            @* ELIMINAR *@
+            <div class="modal fade" id="modEliminar-@localidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Eliminar Localidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>                                        
+                  <div class="modal-body">
+                    <div class="alert alert-danger" role="alert">
+                      !Esta seguro de eliminar la Localidad @localidad.Cadena!
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <form asp-action="EliminarLocalidad" asp-route-id="@localidad.Id" method="get">
+                      <input type="submit" class="ui positive button" value="Si ">
+                      <input type="button" class="ui negative button" data-dismiss="modal" value="No">
                     </form>
-                  </td> *@
-                </tr>     
-            }
-        </tbody>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @* EDITAR *@
+            <div class="modal fade" id="modEditar-@localidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Editar Localidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>                                        
+                  <div class="modal-body">
+                    <div class="alert alert-warning" role="alert">
+                      !Esta seguro de Editar la Localidad @localidad.Cadena!
+                    </div>
+                      <form asp-action="EditarLocalidad" asp-route-id="@localidad.Id" method="post" id="formEditarLocalidad">
+                        <div class="form-row">          
+                          <div class="form-group col-10">
+                            <input asp-for="Cadena" type="text" placeholder="Ingrese nuevo nombre..." class="form-control" required/>
+                          </div>
+                        </div>
+                      </form>
+                  <div class="modal-footer">
+                    <input type="submit" class="ui positive button" form="formEditarLocalidad" value="Guardar">
+                    <input type="button" class="ui negative button" data-dismiss="modal" value="Carcelar">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>     
+      }
+  </tbody>
 </table>
 <br/>
+
 <div class="row">
     <div class="col-10">
         <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
     </div>
 </div>
 
-@* Eliminar  *@
+@* <script type="text/javascript">
+    
+    (function(document) {
+      'use strict';
 
-<div class="modal fade" id="modEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+      var LightTableFilter = (function(Arr) {
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+        var _input;
 
-        <form asp-action="Eliminar" method="post">
-            <div class="input-group mb-3">
-              <input type="text" placeholder="Localidad" class="form-control" required />
-              <div class="col-0">
-                <input type="submit" class="btn btn-outline-danger" value="Eliminar"/>
-              </div>
-            </div>
-        </form>
+        function _onInputEvent(e) {
+          _input = e.target;
+          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+          Arr.forEach.call(tables, function(table) {
+            Arr.forEach.call(table.tBodies, function(tbody) {
+              Arr.forEach.call(tbody.rows, _filter);
+            });
+          });
+        }
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Carcelar</button>
-      </div>
-    </div>
-  </div>
-</div>
+        function _filter(row) {
+          var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        }
 
-@* Editar *@
+        return {
+          init: function() {
+            var inputs = document.getElementsByClassName('light-table-filter');
+            Arr.forEach.call(inputs, function(input) {
+              input.oninput = _onInputEvent;
+            });
+          }
+        };
+      })(Array.prototype);
 
-<div class="modal fade" id="modEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form asp-action="Editar" method="post">
+      document.addEventListener('readystatechange', function() {
+        if (document.readyState === 'complete') {
+          LightTableFilter.init();
+        }
+      });
 
-            <div class="input-group mb-3">
-                <input type="search" class="form-control" placeholder="Localidad" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-danger" type="button" id="button-addon2">Editar</button>
-                </div>
-            </div>
+    })(document);
+    </script> *@
 
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 

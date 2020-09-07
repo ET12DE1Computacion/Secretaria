@@ -37,13 +37,23 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
             return RedirectToAction("Index");
         }
 
-        // Revición
-        [HttpPost]
-        public IActionResult Eliminar(int IdL)
+        [HttpGet]
+        public IActionResult EliminarNacionalidad(int id)
         {
-            IEnumerable<Nacionalidad> nacionalidades = this.unitOfWork.Nacionalidades.GetTs();
-            this.unitOfWork.Nacionalidades.Delete(nacionalidades.SingleOrDefault(x => x.Id == IdL));
+            Nacionalidad nacionalidad = this.unitOfWork.Nacionalidades.GetTs().FirstOrDefault(x => x.Id == id);
+            if (nacionalidad != null)
+            {
+                this.unitOfWork.Nacionalidades.Delete(nacionalidad);
+                this.unitOfWork.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditarNacionalidad(Nacionalidad nacionalidad)
+        {
+            this.unitOfWork.Nacionalidades.GetTs().FirstOrDefault(x => x.Id == nacionalidad.Id).Cadena = nacionalidad.Cadena;
             this.unitOfWork.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }

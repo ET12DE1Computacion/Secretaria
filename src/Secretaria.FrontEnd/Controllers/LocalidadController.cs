@@ -39,18 +39,25 @@ namespace Secretaria.FrontEnd.Controllers
         }
 
         // Revición
-        [HttpPost]
-        public IActionResult Eliminar(int IdL)
+        [HttpGet]
+        public IActionResult EliminarLocalidad(int id)
         {
-
-            if (IdL == 0)
+            Localidad localidad = this.unitOfWork.Localidades.GetTs().FirstOrDefault(x=> x.Id==id);
+            if (localidad != null)
             {
-                IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs();
-                this.unitOfWork.Localidades.Delete(localidades.First(x => x.Id == IdL));
+                this.unitOfWork.Localidades.Delete(localidad);
                 this.unitOfWork.SaveChanges();
             }
             return RedirectToAction("Index");
         }
-
+        
+        [HttpPost]
+        public IActionResult EditarLocalidad(Localidad localidad)
+        {
+            this.unitOfWork.Localidades.GetTs().FirstOrDefault(x => x.Id == localidad.Id).Cadena = localidad.Cadena;
+            this.unitOfWork.SaveChanges();
+            
+            return RedirectToAction("Index");
+        }
     }
 }

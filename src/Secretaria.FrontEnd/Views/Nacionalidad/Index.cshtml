@@ -7,39 +7,92 @@
 </div>
 <br />
 
-<form asp-controller="Nacionalidad" asp-action="Index" method="post">
+<form asp-action="Index" method="post">
     <div class="form-row">
         <div class="form-group col-6">
-            <input asp-for="Cadena" type="text" placeholder="Nacionalidad" class="form-control" required />
+            <input asp-for="Cadena" type="text" data-table="order-table" placeholder="Nacionalidad" class="form-control light-table-filter" required />
         </div>
-        <div class="col-0">
+        <div>
             <input type="submit" class="btn btn-outline-primary" value="Agregar"/>
         </div>
-        <div class="col-0">
-            <input type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modEditar" value="Editar"></button>
-        </div>
-        <div class="col-0">
-            <input type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modEliminar" value="Eliminar"></button>
-        </div>
-    </div>   
+    </div>
 </form>
 
 <br/>
 
-<table class="table table-bordered table-hover table-sm">
-    <thead class="thead-dark">
+<table class="table table-bordered table-hover table-sm order-table">
+  <thead class="thead-dark">
+      <tr>
+          <th>Nacionalidad</th>
+          <th>Accion</th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach (var nacionalidad in @ViewBag.nacionalidades)
+      {
         <tr>
-            <th>Nacionalidad</th>
+          <td class="col-6">@nacionalidad.Cadena</td>
+          <td>
+            <div class="btn-group">
+              <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#modEliminar-@nacionalidad.Id" value="Eliminar">
+              <input type="reset" form="formEditar" class="btn btn-warning" data-toggle="modal" data-target="#modEditar-@nacionalidad.Id" value="Editar">
+            </div>
+              @* ELIMINAR *@
+              <div class="modal fade" id="modEliminar-@nacionalidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Eliminar Nacionalidad</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>                                        
+                    <div class="modal-body">
+                      <div class="alert alert-danger" role="alert">
+                        !Esta seguro de eliminar la Nacionalidad: @nacionalidad.Cadena!
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <form asp-action="EliminarNacionalidad" asp-route-id="@nacionalidad.Id" method="get">
+                        <input type="submit" class="ui positive button" value="Si ">
+                        <input type="button" class="ui negative button" data-dismiss="modal" value="No">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @* EDITAR *@
+              <div class="modal fade" id="modEditar-@nacionalidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Editar Nacionalidad</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>                                        
+                    <div class="modal-body">
+                      <div class="alert alert-warning" role="alert">
+                        !Esta seguro de Editar la Nacionalidad @nacionalidad.Cadena!
+                      </div>
+                        <form asp-action="EditarNacionalidad" asp-route-id="@nacionalidad.Id" method="post" id="formEditarNacionalidad" >
+                          <div class="form-row">
+                            <div class="form-group col-10">
+                              <input asp-for="Cadena" type="text" placeholder="Ingrese nuevo nombre..." class="form-control" required/>
+                            </div>
+                          </div>
+                        </form>
+                    <div class="modal-footer">
+                      <input type="submit" class="ui positive button" form="formEditarNacionalidad" value="Guardar">
+                      <input type="button" class="ui negative button" data-dismiss="modal" value="Carcelar">
+                    </div>
+                  </div>
+                </div>
+              </div> 
+          </td>
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var nacionalidad in @ViewBag.nacionalidades)
-        {
-            <tr>
-                <td>@nacionalidad.Cadena</td>
-            </tr>
-        }
-    </tbody>
+      }
+  </tbody>
 </table>
 
 <br>
@@ -48,64 +101,4 @@
     <div class="col-10">
         <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
     </div>
-</div>
-
-@* Eliminar *@
-
-<div class="modal fade" id="modEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <form asp-action="Eliminar" method="post">
-           <div class="input-group mb-3">
-              <input type="text" placeholder="Nacionalidad" class="form-control" required />
-              <div class="col-0">
-                <input type="submit" class="btn btn-outline-danger" value="Eliminar"/>
-              </div>
-            </div>
-        </form>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Carcelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-@* Editar *@
-
-<div class="modal fade" id="modEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <form asp-action="Editar" method="post">
-           <div class="input-group mb-3">
-              <input type="text" placeholder="Nacionalidad" class="form-control" required />
-              <div class="col-0">
-                <input type="submit" class="btn btn-outline-danger" value="Editar"/>
-              </div>
-            </div>
-        </form>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
 </div>
