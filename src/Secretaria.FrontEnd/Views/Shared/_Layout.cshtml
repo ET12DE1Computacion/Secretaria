@@ -4,43 +4,65 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Secretaria</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/et12styles.css" />
+    <link href="~/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <link href="~/libs/selectize/dist/css/selectize.css" rel="stylesheet" />
+    <link href="~/libs/fullcalendar/core/main.min.css" rel="stylesheet" />
+    <link href="~/libs/fullcalendar/daygrid/main.min.css" rel="stylesheet" />
+    <link href="~/libs/fullcalendar/timegrid/main.min.css" rel="stylesheet" />
+    <link href="~/libs/fullcalendar/list/main.min.css" rel="stylesheet" />
+    <link href="~/libs/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+    <link href="~/libs/nouislider/distribute/nouislider.min.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css" rel="stylesheet" />
+    <!-- Tabler Core -->
+    <link href="~/css/tabler.min.css" rel="stylesheet" />
+    <!-- Tabler Plugins -->
+    <link href="~/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="~/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="~/css/tabler-buttons.min.css" rel="stylesheet" />
+    <link href="~/css/demo.min.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Secretaria</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+    <header class="navbar navbar-expand-md navbar-light">
+        <div class="container-xl">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Secretaria</a>
+
+            <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="navbar-nav flex-grow-1">
                     <partial name="_LayoutMenuPartial" />
                 </ul>
             </div>
+
             <ul class="navbar-nav nav-right">
                 <partial name="_LayoutLoginPartial" />
             </ul>
-        </nav>
+        </div>
     </header>
-    <div class="container-fluid">
-
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Secretaria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+            <div class="container">
+                &copy; 2020 - Secretaria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <!-- Libs JS -->
+    <script src="~/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/libs/jquery/dist/jquery.slim.min.js"></script>
+    <script src="~/libs/autosize/dist/autosize.min.js"></script>
+    <script src="~/libs/imask/dist/imask.min.js"></script>
+    <script src="~/libs/selectize/dist/js/standalone/selectize.min.js"></script>
+    <script src="~/libs/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="~/libs/flatpickr/dist/plugins/rangePlugin.js"></script>
+    <script src="~/libs/nouislider/distribute/nouislider.min.js"></script>
+    <!-- Tabler Core -->
+    <script src="~/js/tabler.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
