@@ -226,7 +226,6 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
             return View(model);
         }
 
-        // This action responds to HttpPost and receives EditRoleViewModel
         [HttpPost]
         public async Task<IActionResult> EditarRol(EditarRolViewModel model)
         {
@@ -288,6 +287,7 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
                 CreatedBy = user.CreatedBy,
                 CreationDate = user.CreationDate.ToString(),
                 CreationIp = user.CreationIp,
+                PasswordHash = user.PasswordHash,
                 PathImagen = user.PathImagen,
                 Claims = userClaims.Select(c => c.Value).ToList(),
                 Roles = userRoles

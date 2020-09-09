@@ -4,70 +4,86 @@
     ViewBag.Title = "Usuarios";
 }
 
-<h1 class="display-4">Usuarios</h1>
-
-<div class="card">
-    <div class="card-body">
-        <a asp-action="CrearUsuario" asp-controller="Administracion" class="btn btn-outline-primary mb-3" style="width:auto"><i class="fad fa-user"></i> Nuevo Usuario</a>
-
-        @if (Model.Any())
-        {
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Creado Por</th>
-                        <th scope="col">Fecha Creación</th>
-                        <th scope="col">IP</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var user in Model)
-                    {
-                        <tr>
-                            <td>@user.Id</td>
-                            <td>@user.NombreCompleto</td>
-                            <td>@user.UserName</td>
-                            <td>@user.CreatedBy</td>
-                            <td>@user.CreationDate</td>
-                            <td>@user.CreationIp</td>
-                            <td>
-                                <form asp-action="BorrarUsuario" asp-route-id="@user.Id" method="post">
-                                    <a asp-controller="Administracion" asp-action="EditarUsuario" asp-route-id="@user.Id" class="btn btn-outline-primary">Editar</a>
-                                    <span id="confirmDeleteSpan_@user.Id" style="display:none">
-                                        <span>Seguro?</span>
-                                        <button type="submit" class="btn btn-outline-danger">Aceptar</button>
-                                        <a href="#" class="btn btn-outline-primary" onclick="confirmDelete('@user.Id', false)">Cancelar</a>
-                                    </span>
-
-                                    <span id="deleteSpan_@user.Id">
-                                        <a href="#" class="btn btn-outline-danger" onclick="confirmDelete('@user.Id', true)">Borrar</a>
-                                    </span>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-
-        <script>
-            function confirmDelete(uniqueId, isTrue) {
-
-                var deleteSpan = 'deleteSpan_' + uniqueId;
-                var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
-
-                if (isTrue) {
-                    $('#' + deleteSpan).hide();
-                    $('#' + confirmDeleteSpan).show();
-                } else {
-                    $('#' + deleteSpan).show();
-                    $('#' + confirmDeleteSpan).hide();
-                }
-            }
-        </script>
+@*<h2 class="page-title">Usuarios</h2>*@
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <h2 class="page-title">
+                Usuarios
+            </h2>
+        </div>
+        <div class="col-auto">
+            <div class="text-muted text-h5 mt-2">@Model.Count() personas</div>
+        </div>
+        <!-- Page title actions -->
+        <div class="col-auto ml-auto d-print-none">
+            <div class="d-flex">
+                @*<input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="Buscar.." />*@
+                <a asp-action="CrearUsuario" asp-controller="Administracion" class="btn btn-outline-primary">Nuevo Usuario</a>
+            </div>
+        </div>
     </div>
+</div>
+
+
+<div class="row">
+    @if (Model.Any())
+    {
+
+        @foreach (var user in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row row-sm align-items-center">
+                            <div class="col-auto">
+                                <span class="avatar avatar-md">@user.NombreCompleto[0]</span>
+                            </div>
+                            <div class="col">
+                                <h3 class="mb-0"><a href="#">@user.NombreCompleto</a></h3>
+                                <div class="text-muted text-h5">@user.UserName</div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-4">
+                            <div class="col">
+                                <span class="badge bg-indigo-lt">
+                                    @user.CreationDate
+                                </span>
+                            </div>
+                            <div class="col">
+                                <span class="badge bg-indigo-lt">
+                                    @user.CreationIp
+                                </span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="btn-list">
+                                    <a asp-controller="Administracion" asp-action="EditarUsuario" asp-route-id="@user.Id" class="btn btn-secondary btn-sm">Editar</a>
+                                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#borrarUsuarioModal-@user.Id">
+                                        Borrar
+                                    </a>
+
+                                    <div class="modal modal-blur fade" id="borrarUsuarioModal-@user.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="modal-title">Desea eliminar este usuario?</div>
+                                                    <div>If you proceed, you will lose all your personal data.</div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-link link-secondary mr-auto" data-dismiss="modal">Cancelar</button>
+                                                    <form asp-controller="Administracion" asp-action="BorrarUsuario" asp-route-id="@user.Id" method="post">
+                                                        <button type="submit" class="btn btn-danger">Aceptar</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 </div>
