@@ -6,7 +6,7 @@ using Secretaria.Domain.Context.DatosPersonalesConfiguracion;
 using Secretaria.Domain.Context.EscuelaConfiguracion;
 using Secretaria.Domain.Context.FaltasConfiguracion;
 
-namespace Secretaria.Domain.ADO
+namespace Secretaria.Domain
 {
     public class SecretariaDbContext : DbContext
     {

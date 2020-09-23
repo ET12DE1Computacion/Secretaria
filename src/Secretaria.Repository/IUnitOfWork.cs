@@ -5,7 +5,7 @@ using Secretaria.Repository.Interfaces.IFaltas;
 
 namespace Secretaria.Repository
 {
-    public interface IUnitOfWork: IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         // Datos Personales
         IDomicilioRepository Domicilios {get;}

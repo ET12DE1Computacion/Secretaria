@@ -1,5 +1,5 @@
 using System;
-using Secretaria.Domain.ADO;
+using Secretaria.Domain;
 // Implementations
 using Secretaria.Repository.Implementations.DatosPersonales;
 using Secretaria.Repository.Implementations.Escuela;
@@ -43,50 +43,36 @@ namespace Secretaria.Repository
         }
 
         // Datos Personales
-        public IDomicilioRepository Domicilios 
-                => domicilioRepository ?? new DomicilioRepository(context);
+        public IDomicilioRepository Domicilios => domicilioRepository ??= new DomicilioRepository(context);
 
-        public ILocalidadRepository Localidades
-                => localidadRepository ?? new LocalidadRepository(context);
+        public ILocalidadRepository Localidades => localidadRepository ??= new LocalidadRepository(context);
 
-        public INacionalidadRepository Nacionalidades
-                => nacionalidadRepository ?? new NacionalidadRepository(context);
+        public INacionalidadRepository Nacionalidades => nacionalidadRepository ??= new NacionalidadRepository(context);
 
-        public IPersonaRepository Personas
-                => personaRepository ?? new PersonaRepository(context);
+        public IPersonaRepository Personas => personaRepository ??= new PersonaRepository(context);
 
-        public ITipoDocumentoRepository TiposDeDocumentos
-                => tipoDocumentoRepository ?? new TipoDocumentoRepository(context);
+        public ITipoDocumentoRepository TiposDeDocumentos => tipoDocumentoRepository ??= new TipoDocumentoRepository(context);
 
         // Escuela
-        public IAlumnoRepository Alumnos
-                => alumnoRepository ?? new AlumnoRepository(context);
+        public IAlumnoRepository Alumnos => alumnoRepository ??= new AlumnoRepository(context);
         
-        public IAptoMedicoRepository AptosMedicos
-                => aptoMedicoRepository ?? new AptoMedicoRepository(context);
+        public IAptoMedicoRepository AptosMedicos => aptoMedicoRepository ??= new AptoMedicoRepository(context);
         
-        public ICursadaRepository Cursadas
-                => cursadaRepository ?? new CursadaRepository(context);
+        public ICursadaRepository Cursadas => cursadaRepository ??= new CursadaRepository(context);
 
-        public ICursoRepository Cursos
-                => cursoRepository ?? new CursoRepository(context);
+        public ICursoRepository Cursos => cursoRepository ??= new CursoRepository(context);
 
-        public ISeguimientoRepository Seguimientos
-                => seguimientoRepository ?? new SeguimientoRepository(context);
+        public ISeguimientoRepository Seguimientos => seguimientoRepository ??= new SeguimientoRepository(context);
 
 
         // Faltas
-        public IAsistenciaCursoRepository AsistenciasDeCursos
-                => asistenciaCursoRepository ?? new AsistenciaCursoRepository(context);
+        public IAsistenciaCursoRepository AsistenciasDeCursos=> asistenciaCursoRepository ??= new AsistenciaCursoRepository(context);
 
-        public IFaltaRepository Faltas
-                => faltaRepository ?? new FaltaRepository(context);
+        public IFaltaRepository Faltas => faltaRepository ??= new FaltaRepository(context);
 
-        public ITipoAusenciaRepository TiposDeAusencias
-                => tipoAusenciaRepository ?? new TipoAusenciaRepository(context);
+        public ITipoAusenciaRepository TiposDeAusencias => tipoAusenciaRepository ??= new TipoAusenciaRepository(context);
 
-        public ITipoFaltaRepository TiposDeFaltas
-                => tipoFaltaRepository ?? new TipoFaltaRepository(context);
+        public ITipoFaltaRepository TiposDeFaltas => tipoFaltaRepository ??= new TipoFaltaRepository(context);
 
         public void Dispose()
         {

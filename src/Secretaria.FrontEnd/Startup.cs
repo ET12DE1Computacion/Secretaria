@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Secretaria.Domain.ADO;
+using Secretaria.Domain;
 using Secretaria.FrontEnd.Identity;
 
 namespace Secretaria.FrontEnd
