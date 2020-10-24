@@ -28,45 +28,20 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Secretaria</a>
-            <div col-1>
-                <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Datos Personales
-                </a>
-                <div class="dropdown-menu " >
-                    <a class="dropdown-item" asp-area="" asp-controller="Localidad" asp-action="Index">Localidades</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Nacionalidad" asp-action="Index">Nacionalidades</a>
-                </div>
-            </div> *@
-
-            @* ---- *@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <div class="flex-grow-1 nav nav-pills">
-                    <div class="nav-item col-1">
+                <ul class="flex-grow-1 nav nav-tabs">
+                    <li class="nav-item col-8">
                         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Secretaria</a>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            Datos Personales
-                        </a>
-                        <div class="dropdown-menu" >
-                            <a class="dropdown-item" asp-controller="Localidad" asp-action="Index">Localidades</a>
-                            <a class="dropdown-item" asp-controller="Nacionalidad" asp-action="Index">Nacionalidades</a>
-                        </div>
-                    </div>
-            @* ---- *@
-
-            <div class="collapse navbar-collapse" id="navbar-menu">
-                <ul class="navbar-nav flex-grow-1">
+                    </li>
                     <partial name="_LayoutMenuPartial" />
                 </ul>
             </div>
             <div class="navbar-nav flex-row order-md-last">
-                
-                    <partial name="_LayoutLoginPartial" />
+                <partial name="_LayoutLoginPartial" />
             </div>
         </div>
     </header>
+
     <div class="content">
         <div class="container">
             <main role="main" class="pb-3">

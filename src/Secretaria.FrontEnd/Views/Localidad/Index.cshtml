@@ -20,7 +20,7 @@
 <br/>
 @* <input class="form-control col-md-3 light-table-filter" data-table="order-table" type="text" placeholder="Search.."> *@
 
-<table class="table table-bordered table-hover table-sm order-table">
+@* <table class="table table-bordered table-hover table-sm order-table">
   <thead class="thead-dark">
       <tr>
           <th>Localidad</th>
@@ -37,7 +37,7 @@
               <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#modEliminar-@localidad.Id" value="Eliminar">
               <input type="reset" form="formEditar" class="btn btn-warning" data-toggle="modal" data-target="#modEditar-@localidad.Id" value="Editar">
             </div>
-            @* ELIMINAR *@
+            
             <div class="modal fade" id="modEliminar-@localidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
@@ -61,7 +61,7 @@
                 </div>
               </div>
             </div>
-            @* EDITAR *@
+            
             <div class="modal fade" id="modEditar-@localidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
@@ -95,56 +95,31 @@
       }
   </tbody>
 </table>
-<br/>
+<br/> *@
+
+<div class="row order-table">
+    @foreach (var localidad in @ViewBag.localidades)
+    {
+
+          <div class="col-6 row row-sm mb-3 align-items-center">
+            @* <a href="#" class="col-auto">
+              <span class="avatar" style="background-image: url(./static/avatars/000m.jpg)">
+                <span class="badge bg-red"></span></span>
+            </a> *@
+            <div class="col text-truncate">
+              <a href="#" class="text-body d-block text-truncate">@localidad.Cadena</a>
+            </div>
+
+      </div>
+    }
+</div>
+  
 
 <div class="row">
     <div class="col-10">
         <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
     </div>
 </div>
-
-@* <script type="text/javascript">
-    
-    (function(document) {
-      'use strict';
-
-      var LightTableFilter = (function(Arr) {
-
-        var _input;
-
-        function _onInputEvent(e) {
-          _input = e.target;
-          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-          Arr.forEach.call(tables, function(table) {
-            Arr.forEach.call(table.tBodies, function(tbody) {
-              Arr.forEach.call(tbody.rows, _filter);
-            });
-          });
-        }
-
-        function _filter(row) {
-          var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-        }
-
-        return {
-          init: function() {
-            var inputs = document.getElementsByClassName('light-table-filter');
-            Arr.forEach.call(inputs, function(input) {
-              input.oninput = _onInputEvent;
-            });
-          }
-        };
-      })(Array.prototype);
-
-      document.addEventListener('readystatechange', function() {
-        if (document.readyState === 'complete') {
-          LightTableFilter.init();
-        }
-      });
-
-    })(document);
-    </script> *@
 
 
 
