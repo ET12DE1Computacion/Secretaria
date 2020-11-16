@@ -22,12 +22,32 @@
     <link href="~/css/demo.min.css" rel="stylesheet" />
 </head>
 <body>
-    <header class="navbar navbar-expand-md navbar-light">
+  <header class="navbar navbar-expand-md navbar-dark">
+    <div class="container-xl">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pr-0 pr-md-3">
+        Secretaria
+      </a>
+      <div class="navbar-nav flex-row order-md-last">
+        <partial name="_LayoutLoginPartial" />
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+          <ul class="navbar-nav">
+            <partial name="_LayoutMenuPartial" />
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    @* <header class="navbar navbar-expand-md navbar-light">
         <div class="container-xl">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="flex-grow-1 nav nav-tabs">
                     <li class="nav-item col-8">
@@ -40,7 +60,7 @@
                 <partial name="_LayoutLoginPartial" />
             </div>
         </div>
-    </header>
+    </header> *@
 
     <div class="content">
         <div class="container">
@@ -55,6 +75,7 @@
                 &copy; 2020 - Secretaria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>*@
+
     <!-- Libs JS -->
     <script src="~/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/libs/jquery/dist/jquery.slim.min.js"></script>
@@ -67,7 +88,8 @@
     <!-- Tabler Core -->
     <script src="~/js/tabler.min.js"></script>
 
-    @* BUSQUEDA *@
+
+    @* Filtrador *@
     <script type="text/javascript">
         (function(document) {
             'use strict';

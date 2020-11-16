@@ -1,26 +1,39 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    @* <div class="nav-item dropdown"> *
-        @*<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            </a>*@
-        
-        <li class="nav-item dropdown col-2">
-            <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Datos Personales
-            </a>
-            <div class="dropdown-menu" >
-                <a class="dropdown-item" asp-controller="Localidad" asp-action="Index">Localidades</a>
-                <a class="dropdown-item" asp-controller="Nacionalidad" asp-action="Index">Nacionalidades</a>
-            </div>
-        </li>
+    <li class="nav-item" >
+        <a class="nav-link" asp-controller="Alumno" asp-action="Index">
+            Alumnos
+        </a>
+    </li>
 
-        <li class="nav-item dropdown">
-            <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Administración
-            </a>
-            <div class="dropdown-menu" >
-                <a class="dropdown-item" asp-area="" asp-controller="Administracion" asp-action="Usuarios">Usuarios</a>
-                <a class="dropdown-item" asp-area="" asp-controller="Administracion" asp-action="Roles">Roles</a>
-            </div>
-        </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <span class="nav-link-title">
+                Datos Personales
+            </span>  
+        </a>
+        <div class="dropdown-menu" >
+            <a class="dropdown-item" asp-controller="Localidad" asp-action="Index">Localidades</a>
+            <a class="dropdown-item" asp-controller="Nacionalidad" asp-action="Index">Nacionalidades</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" >
+            <span class="nav-link-title">
+            Administración
+            </span>
+        </a>
+        <ul class="dropdown-menu">
+            <li >
+                <a class="dropdown-item" asp-area="" asp-controller="Administracion" asp-action="Roles" >
+                    Roles
+                </a>
+            </li>
+            <li >
+                <a class="dropdown-item" asp-area="" asp-controller="Administracion" asp-action="Usuarios" >
+                    Usuarios
+                </a>
+            </li>
+        </ul>
+    </li>
 }

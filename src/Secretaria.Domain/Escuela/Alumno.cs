@@ -5,10 +5,10 @@ using Secretaria.Domain.Faltas;
 namespace Secretaria.Domain.Escuela
 {
     public class Alumno
-    {        
+    {
         public short Libro { get; set; }
         
-        public byte Folio { get; set; }        
+        public byte Folio { get; set; }
 
         public Curso CursoActual { get; set; }
 
