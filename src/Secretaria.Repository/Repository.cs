@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Secretaria.Repository
 {
@@ -15,7 +16,7 @@ namespace Secretaria.Repository
             this.context = context;
         }
 
-        public virtual void Insert (T id)
+        public virtual void Insert(T id)
         {
             this.context.Add(id);
         }
@@ -26,10 +27,20 @@ namespace Secretaria.Repository
         }
 
         // Check
-        public virtual IEnumerable<T> GetAll( Expression<Func<T, bool>> condition, 
+        public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>> condition,
                                               Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
         {
             return orderBy(this.context.Set<T>().Where(condition));
+        }
+
+        public virtual T GetOne(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        {
+            IQueryable<T> result = context.Set<T>().Where(predicate);
+
+            if (include != null)
+                result = include(result);
+
+            return result.FirstOrDefault();
         }
 
         public virtual IEnumerable<T> Find(Expression<Func<T, bool>> condition)
@@ -47,5 +58,25 @@ namespace Secretaria.Repository
             return context.Set<T>().ToList();
         }
 
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> condition, Func<IQueryable<T>, IIncludableQueryable<T, object>> include, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
+        {
+            IQueryable<T> result = context.Set<T>().Where(condition);
+
+            if (include != null)
+                result = include(result);
+
+            return result.ToList();
+
+        }
+
+        public IEnumerable<T> GetAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> include)
+        {
+            IQueryable<T> result = context.Set<T>();
+
+            if (include != null)
+                result = include(result);
+
+            return result.ToList();
+        }
     }
 }

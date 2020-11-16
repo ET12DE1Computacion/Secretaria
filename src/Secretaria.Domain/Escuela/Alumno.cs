@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Query;
 using Secretaria.Domain.DatosPersonales;
 using Secretaria.Domain.Faltas;
 
@@ -25,6 +27,11 @@ namespace Secretaria.Domain.Escuela
         public IEnumerable<Cursada> Cursadas { get; set; }
 
         public IEnumerable<Falta> Faltas { get; set; }
+
+        public IIncludableQueryable<Alumno, object> Include(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<AptoMedico> AptoMedicos { get; set; }
 

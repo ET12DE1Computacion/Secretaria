@@ -11,20 +11,22 @@
     <table class="table table-bordered table-hover table-sm">
         <thead class="thead-dark">
             <tr>
-                <th>Folio</th>
                 <th>Libro</th>
+                <th>Folio</th>
                 <th>Numero de Documento</th>
                 <th>Nombre</th>
+                <th>Apellido</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var alumno in Model)
             {
                 <tr>
-                    <td>@alumno.Folio</td>
                     <td>@alumno.Libro</td>
+                    <td>@alumno.Folio</td>
                     <td>@alumno.NroDocumento</td>
-                    @* <td>@alumno.Persona.Nombre</td> *@
+                    <td>@alumno.Persona.Nombre</td>
+                    <td>@alumno.Persona.Apellido</td>
                 </tr>
             }
         </tbody>

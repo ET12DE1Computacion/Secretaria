@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Secretaria.Domain.Escuela;
 using Secretaria.Domain.DatosPersonales;
 using Secretaria.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Secretaria.FrontEnd.Controllers
 {
@@ -18,11 +19,13 @@ namespace Secretaria.FrontEnd.Controllers
         {
             this.unitOfWork = unitOfWork;
         }
-        
+
         [HttpGet]
         public IActionResult Index()
         {
-            IEnumerable<Alumno> alumnos = this.unitOfWork.Alumnos.GetTs();
+            IEnumerable<Alumno> alumnos = this.unitOfWork.Alumnos.GetAll(include: I => I
+                .Include(x => x.Persona)
+                    .ThenInclude(x => x.Nacionalidad));
 
             foreach (var alumno in alumnos)
             {
@@ -32,18 +35,18 @@ namespace Secretaria.FrontEnd.Controllers
 
             return View("Index", alumnos);
         }
-        
+
         [HttpGet]
         public IActionResult RegistrarAlumno()
         {
             IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs().OrderBy(x => x.Cadena);
-            ViewBag.localidades =  localidades;
+            ViewBag.localidades = localidades;
 
             IEnumerable<Nacionalidad> nacionalidades = this.unitOfWork.Nacionalidades.GetTs().OrderBy(x => x.Cadena);
-            ViewBag.nacionalidades =  nacionalidades;
+            ViewBag.nacionalidades = nacionalidades;
 
             IEnumerable<TipoDocumento> tipoDocumentos = this.unitOfWork.TiposDeDocumentos.GetTs().OrderBy(x => x.Cadena);
-            ViewBag.tipoDocumentos =  tipoDocumentos;
+            ViewBag.tipoDocumentos = tipoDocumentos;
 
             return View("RegistrarAlumno");
         }
@@ -51,7 +54,7 @@ namespace Secretaria.FrontEnd.Controllers
         [HttpPost]
         public IActionResult Registrar(Alumno alumnoTest)
         {
-            
+
             // Domicilio
             Domicilio domicilio = new Domicilio();
             domicilio = alumnoTest.Persona.Domicilio;
@@ -67,12 +70,12 @@ namespace Secretaria.FrontEnd.Controllers
             persona.Domicilio = domicilio;
 
             TipoDocumento tipoDocumento = new TipoDocumento();
-            tipoDocumento = this.unitOfWork.TiposDeDocumentos.GetTs().FirstOrDefault(x => x.Id== alumnoTest.Persona.TipoDocumento.Id);
+            tipoDocumento = this.unitOfWork.TiposDeDocumentos.GetTs().FirstOrDefault(x => x.Id == alumnoTest.Persona.TipoDocumento.Id);
             persona.TipoDocumento = tipoDocumento;
             persona.IdTipoDocumento = persona.TipoDocumento.Id;
 
             Nacionalidad nacionalidad = new Nacionalidad();
-            nacionalidad = this.unitOfWork.Nacionalidades.GetTs().FirstOrDefault(x => x.Id== alumnoTest.Persona.Nacionalidad.Id);
+            nacionalidad = this.unitOfWork.Nacionalidades.GetTs().FirstOrDefault(x => x.Id == alumnoTest.Persona.Nacionalidad.Id);
             persona.Nacionalidad = nacionalidad;
 
             // Alumno
@@ -84,7 +87,8 @@ namespace Secretaria.FrontEnd.Controllers
             alumno.NroDocumento = persona.NroDocumento;
 
             Curso curso = new Curso();
-            curso = this.unitOfWork.Cursos.GetTs().FirstOrDefault(x => x.Anio == alumnoTest.CursoActual.Anio && x.Division == alumnoTest.CursoActual.Division);
+            //curso = this.unitOfWork.Cursos.GetTs().FirstOrDefault(x => x.Anio == 0 && x.Division == 0);
+            curso = this.unitOfWork.Cursos.GetOne(x => x.Anio == 0 && x.Division == 0);
             alumno.CursoActual = curso;
 
             Console.WriteLine(alumno.Libro);
