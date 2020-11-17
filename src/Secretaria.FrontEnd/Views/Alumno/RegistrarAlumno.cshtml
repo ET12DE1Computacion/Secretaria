@@ -30,26 +30,6 @@
     </div>
     <br>
     <div class="row">
-        <div class="form-group col-md-1">
-            <label >Año</label>
-            <select asp-for="CursoActual.Anio" type="text" class="form-control" required >
-                <option selected>1</option>
-                    @* @foreach (var tipoDocumento in @ViewBag.tipoDocumentos)
-                    {
-                        <option value="@tipoDocumento.Id">@tipoDocumento.Cadena</option>
-                    } *@
-            </select>
-        </div>
-        <div class="form-group col-md-1">
-            <label >División</label>
-            <select asp-for="CursoActual.Division" type="text" class="form-control" required >
-                <option selected>4</option>
-                    @* @foreach (var tipoDocumento in @ViewBag.tipoDocumentos)
-                    {
-                        <option value="@tipoDocumento.Id">@tipoDocumento.Cadena</option>
-                    } *@
-            </select>
-        </div>
         <div class="form-group col-md-3">
             <label >Tipo de documento</label>
             <select asp-for="Persona.TipoDocumento.Id" type="text" class="form-control" required >
@@ -64,11 +44,11 @@
             <label >Documento</label>
             <input asp-for="Persona.NroDocumento" type="text" class="form-control" required >
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-3">
             <label>Fecha de nacimiento</label>
             <input asp-for="Persona.Nacimiento" type="date" class="form-control" required>
         </div>   
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-3">
             <label >Nacionalidad</label>
             <select asp-for="Persona.Nacionalidad.Id" type="text" class="form-control" required >
                 <option selected>Seleccione</option>

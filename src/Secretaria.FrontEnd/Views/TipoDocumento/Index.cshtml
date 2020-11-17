@@ -1,0 +1,105 @@
+@model Secretaria.Domain.DatosPersonales.Nacionalidad
+
+<div class="row">
+    <div class="col-10">
+        <h1 class="text-monospace">Tipo Documento</h1>
+    </div>
+</div>
+<br />
+
+<form asp-action="Index" method="post">
+    <div class="form-row">
+        <div class="form-group col-6">
+            <input asp-for="Cadena" type="text" data-table="order-table" placeholder="Nacionalidad" class="form-control light-table-filter" required />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-outline-primary" value="Agregar"/>
+        </div>
+    </div>
+</form>
+
+<br/>
+
+<table class="table table-bordered table-hover table-sm order-table">
+  <thead class="thead-dark">
+      <tr>
+          <th>Tipo Documento</th>
+          <th>Accion</th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach (var nacionalidad in @ViewBag.nacionalidades)
+      {
+        <tr>
+          <td class="col-6">@nacionalidad.Cadena</td>
+          <td>
+            <div class="btn-group">
+              <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#modEliminar-@nacionalidad.Id" value="Eliminar">
+              <input type="reset" form="formEditar" class="btn btn-warning" data-toggle="modal" data-target="#modEditar-@nacionalidad.Id" value="Editar">
+            </div>
+              @* ELIMINAR *@
+              <div class="modal fade" id="modEliminar-@nacionalidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Eliminar Tipo Documento</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>                                        
+                    <div class="modal-body">
+                      <div class="alert alert-danger" role="alert">
+                        !Esta seguro de eliminar la Nacionalidad: @nacionalidad.Cadena!
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <form asp-action="EliminarNacionalidad" asp-route-id="@nacionalidad.Id" method="get">
+                        <input type="submit" class="btn btn-success" value="Si ">
+                        <input type="button" class="btn btn-danger" data-dismiss="modal" value="No">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @* EDITAR *@
+              <div class="modal fade" id="modEditar-@nacionalidad.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Editar Nacionalidad</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>                                        
+                    <div class="modal-body">
+                      <div class="alert alert-warning" role="alert">
+                        !Esta seguro de Editar la Nacionalidad @nacionalidad.Cadena!
+                      </div>
+                      <form asp-action="EditarNacionalidad" asp-route-id="@nacionalidad.Id" method="post">
+                        <div class="form-row">
+                          <div class="form-group col-10">
+                            <input asp-for="Cadena" type="text" placeholder="Ingrese nuevo nombre..." class="form-control" required/>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="btn-group">
+                          <input type="submit" class="btn btn-success" value="Guardar">
+                          <input type="button" class="btn btn-danger" data-dismiss="modal" value="Carcelar">
+                        </div>
+                      </form>
+                  </div>
+                </div>
+              </div> 
+          </td>
+        </tr>
+      }
+  </tbody>
+</table>
+
+<br>
+
+<div class="row">
+    <div class="col-10">
+        <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Volver</a>
+    </div>
+</div>
