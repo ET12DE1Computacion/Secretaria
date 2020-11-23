@@ -1,27 +1,29 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Secretaria</title>
-    
-    <link href="~/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-    <link href="~/libs/selectize/dist/css/selectize.css" rel="stylesheet" />
-    <link href="~/libs/fullcalendar/core/main.min.css" rel="stylesheet" />
-    <link href="~/libs/fullcalendar/daygrid/main.min.css" rel="stylesheet" />
-    <link href="~/libs/fullcalendar/timegrid/main.min.css" rel="stylesheet" />
-    <link href="~/libs/fullcalendar/list/main.min.css" rel="stylesheet" />
-    <link href="~/libs/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
-    <link href="~/libs/nouislider/distribute/nouislider.min.css" rel="stylesheet" />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css" rel="stylesheet" />
-    <!-- Tabler Core -->
-    <link href="~/css/tabler.min.css" rel="stylesheet" />
-    <!-- Tabler Plugins -->
-    <link href="~/css/tabler-flags.min.css" rel="stylesheet" />
-    <link href="~/css/tabler-payments.min.css" rel="stylesheet" />
-    <link href="~/css/tabler-buttons.min.css" rel="stylesheet" />
-    <link href="~/css/demo.min.css" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secretaria</title>
+
+  <link href="~/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+  <link href="~/libs/selectize/dist/css/selectize.css" rel="stylesheet" />
+  <link href="~/libs/fullcalendar/core/main.min.css" rel="stylesheet" />
+  <link href="~/libs/fullcalendar/daygrid/main.min.css" rel="stylesheet" />
+  <link href="~/libs/fullcalendar/timegrid/main.min.css" rel="stylesheet" />
+  <link href="~/libs/fullcalendar/list/main.min.css" rel="stylesheet" />
+  <link href="~/libs/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+  <link href="~/libs/nouislider/distribute/nouislider.min.css" rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css" rel="stylesheet" />
+  <!-- Tabler Core -->
+  <link href="~/css/tabler.min.css" rel="stylesheet" />
+  <!-- Tabler Plugins -->
+  <link href="~/css/tabler-flags.min.css" rel="stylesheet" />
+  <link href="~/css/tabler-payments.min.css" rel="stylesheet" />
+  <link href="~/css/tabler-buttons.min.css" rel="stylesheet" />
+  <link href="~/css/demo.min.css" rel="stylesheet" />
 </head>
+
 <body>
   <header class="navbar navbar-expand-md navbar-dark">
     <div class="container-xl">
@@ -44,88 +46,94 @@
     </div>
   </header>
 
-    @* <header class="navbar navbar-expand-md navbar-light">
-        <div class="container-xl">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="flex-grow-1 nav nav-tabs">
-                    <li class="nav-item col-8">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Secretaria</a>
-                    </li>
-                    <partial name="_LayoutMenuPartial" />
-                </ul>
-            </div>
-            <div class="navbar-nav flex-row order-md-last">
-                <partial name="_LayoutLoginPartial" />
-            </div>
-        </div>
+  @* <header class="navbar navbar-expand-md navbar-light">
+    <div class="container-xl">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+    <ul class="flex-grow-1 nav nav-tabs">
+    <li class="nav-item col-8">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Secretaria</a>
+    </li>
+    <partial name="_LayoutMenuPartial" />
+    </ul>
+    </div>
+    <div class="navbar-nav flex-row order-md-last">
+    <partial name="_LayoutLoginPartial" />
+    </div>
+    </div>
     </header> *@
 
-    <div class="content">
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
+  <div class="content">
+    <div class="container">
+      <main role="main" class="pb-3">
+        @RenderBody()
+      </main>
     </div>
+  </div>
 
-    @*<footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2020 - Secretaria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>*@
+  @*<footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2020 - Secretaria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    </footer>*@
 
-    <!-- Libs JS -->
-    <script src="~/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/libs/jquery/dist/jquery.slim.min.js"></script>
-    <script src="~/libs/autosize/dist/autosize.min.js"></script>
-    <script src="~/libs/imask/dist/imask.min.js"></script>
-    <script src="~/libs/selectize/dist/js/standalone/selectize.min.js"></script>
-    <script src="~/libs/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="~/libs/flatpickr/dist/plugins/rangePlugin.js"></script>
-    <script src="~/libs/nouislider/distribute/nouislider.min.js"></script>
-    <!-- Tabler Core -->
-    <script src="~/js/tabler.min.js"></script>
+  <!-- Libs JS -->
+  <script src="~/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="~/libs/jquery/dist/jquery.slim.min.js"></script>
+  <script src="~/libs/autosize/dist/autosize.min.js"></script>
+  <script src="~/libs/imask/dist/imask.min.js"></script>
+  <script src="~/libs/selectize/dist/js/standalone/selectize.min.js"></script>
+  <script src="~/libs/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="~/libs/flatpickr/dist/plugins/rangePlugin.js"></script>
+  <script src="~/libs/nouislider/distribute/nouislider.min.js"></script>
+  <!-- Tabler Core -->
+  <script src="~/js/tabler.min.js"></script>
 
 
-    @* Filtrador *@
-    <script type="text/javascript">
-        (function(document) {
-            'use strict';
-            var LightTableFilter = (function(Arr) {
-            var _input;
-            function _onInputEvent(e) {
-              _input = e.target;
-              var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-              Arr.forEach.call(tables, function(table) {
-                Arr.forEach.call(table.tBodies, function(tbody) {
-                  Arr.forEach.call(tbody.rows, _filter);
-                });
-              });
-            }
-            function _filter(row) {
-              var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-              row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-            }
-            return {
-              init: function() {
-                var inputs = document.getElementsByClassName('light-table-filter');
-                Arr.forEach.call(inputs, function(input) {
-                  input.oninput = _onInputEvent;
-                });
-              }
-            };
-          })(Array.prototype);
-          document.addEventListener('readystatechange', function() {
-            if (document.readyState === 'complete') {
-              LightTableFilter.init();
-            }
-          });   
-        })(document);
-    </script>
+  @* Filtrador *@
+  <script type="text/javascript">
+    (function (document) {
+      'use strict';
+      var LightTableFilter = (function (Arr) {
+        var _input;
+        function _onInputEvent(e) {
+          _input = e.target;
+          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+          Arr.forEach.call(tables, function (table) {
+            Arr.forEach.call(table.tBodies, function (tbody) {
+              Arr.forEach.call(tbody.rows, _filter);
+            });
+          });
+        }
 
-    @RenderSection("Scripts", required: false)
+        function _filter(row) {
+          //var text = row.textContent.toLowerCase();
+          var text = row.cells[0].innerText.toLowerCase();
+          var val = _input.value.toLowerCase();
+          
+          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        }
+
+        return {
+          init: function () {
+            var inputs = document.getElementsByClassName('light-table-filter');
+            Arr.forEach.call(inputs, function (input) {
+              input.oninput = _onInputEvent;
+            });
+          }
+        };
+      })(Array.prototype);
+      document.addEventListener('readystatechange', function () {
+        if (document.readyState === 'complete') {
+          LightTableFilter.init();
+        }
+      });
+    })(document);
+  </script>
+
+  @RenderSection("Scripts", required: false)
 </body>
+
 </html>
