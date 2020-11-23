@@ -88,7 +88,7 @@ namespace Secretaria.FrontEnd.Controllers
 
             Curso curso = new Curso();
             //curso = this.unitOfWork.Cursos.GetTs().FirstOrDefault(x => x.Anio == 0 && x.Division == 0);
-            curso = this.unitOfWork.Cursos.GetOne(x => x.Anio == 0 && x.Division == 0);
+            curso = this.unitOfWork.Cursos.GetOne(x => x.Anio == 1 && x.Division == 4);
             alumno.CursoActual = curso;
 
             Console.WriteLine(alumno.Libro);
