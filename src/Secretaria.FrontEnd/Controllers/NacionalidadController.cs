@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Secretaria.Domain.DatosPersonales;
 using Secretaria.Repository;
 
-namespace Secretaria.FrontEnd.Controllers.Administracion
+namespace Secretaria.FrontEnd.Controllers
 {
     public class NacionalidadController : Controller
     {
@@ -22,7 +22,7 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         public IActionResult Index()
         {
             IEnumerable<Nacionalidad> nacionalidades = this.unitOfWork.Nacionalidades.GetTs().OrderBy(x => x.Cadena);
-            ViewBag.nacionalidades =  nacionalidades;
+            ViewBag.datos =  nacionalidades;
 
             return View("Index");
         }

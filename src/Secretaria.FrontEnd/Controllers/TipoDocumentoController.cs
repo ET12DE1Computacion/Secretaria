@@ -22,7 +22,7 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         public IActionResult Index()
         {
             IEnumerable<TipoDocumento> tipoDocumentos = this.unitOfWork.TiposDeDocumentos.GetTs().OrderBy(x => x.Cadena);
-            ViewBag.tipoDocumentos =  tipoDocumentos;
+            ViewBag.datos =  tipoDocumentos;
 
             return View("Index");
         }
