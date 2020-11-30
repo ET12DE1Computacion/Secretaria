@@ -25,8 +25,8 @@ namespace Secretaria.FrontEnd.Controllers
             IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs().OrderBy(x => x.Cadena);
             ViewBag.datos =  localidades;
 
-            return ViewComponent ("CommonViewDP", new SimpleText {Title = "Localidad", TextForm = "Ingrese la localidad ej. Retiro..."});
-            // return RedirectToAction ("Index");
+            // return ViewComponent ("CommonViewDP", new SimpleText {Title = "Localidad", TextForm = "Ingrese la localidad ej. Retiro..."});
+            return View ("Index");
         }
 
         [HttpPost]
@@ -42,7 +42,7 @@ namespace Secretaria.FrontEnd.Controllers
 
         // Revicións
         [HttpGet]
-        public IActionResult EliminarLocalidad(int id)
+        public IActionResult Eliminar(int id)
         {
             Localidad localidad = this.unitOfWork.Localidades.GetTs().FirstOrDefault(x=> x.Id==id);
             if (localidad != null)
@@ -54,7 +54,7 @@ namespace Secretaria.FrontEnd.Controllers
         }
         
         [HttpPost]
-        public IActionResult EditarLocalidad(Localidad localidad)
+        public IActionResult Editar(Localidad localidad)
         {
             this.unitOfWork.Localidades.GetTs().FirstOrDefault(x => x.Id == localidad.Id).Cadena = localidad.Cadena;
             this.unitOfWork.SaveChanges();

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Secretaria.Domain.DatosPersonales;
+using Secretaria.FrontEnd.Models.Components;
 using Secretaria.Repository;
 
 namespace Secretaria.FrontEnd.Controllers.Administracion
@@ -28,8 +29,9 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpPost]
-        public IActionResult Index(TipoDocumento tipoDocumento)
+        public IActionResult Index(SimpleText tipoDocumentoTest)
         {
+            TipoDocumento tipoDocumento = new TipoDocumento{Cadena = tipoDocumentoTest.Cadena};
             this.unitOfWork.TiposDeDocumentos.Insert(tipoDocumento);
             this.unitOfWork.SaveChanges();
             
@@ -37,7 +39,7 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
         }
 
         [HttpGet]
-        public IActionResult EliminarTipoDocumento(int id)
+        public IActionResult Eliminar(int id)
         {
             TipoDocumento tipoDocumento = this.unitOfWork.TiposDeDocumentos.GetTs().FirstOrDefault(x => x.Id == id);
             if (tipoDocumento != null)
@@ -48,7 +50,7 @@ namespace Secretaria.FrontEnd.Controllers.Administracion
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditarTipoDocumento(TipoDocumento tipoDocumento)
+        public IActionResult Editar(TipoDocumento tipoDocumento)
         {
             this.unitOfWork.TiposDeDocumentos.GetTs().FirstOrDefault(x => x.Id == tipoDocumento.Id).Cadena = tipoDocumento.Cadena;
             this.unitOfWork.SaveChanges();
