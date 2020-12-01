@@ -14,11 +14,5 @@ namespace Secretaria.FrontEnd.Views.Shared.Components.CommonViewDP
         {
             return View(model);
         }
-
-        // public async Task<IViewComponentResult> InvokeAsync(BootstrapModalModel model)
-        // {
-        //     var algo = await ...
-        //     return View(model);
-        // }
     }
 }
