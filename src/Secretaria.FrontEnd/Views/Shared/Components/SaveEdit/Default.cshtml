@@ -1,0 +1,182 @@
+@model Secretaria.FrontEnd.Models.Components.SaveEditModel
+
+<div class="row">
+    <div class="col-10">
+        <h1 class="text-monospace">@Model.Titulo</h1>
+    </div>
+</div>
+
+<br>
+<br>
+<h2>Alumno</h2>
+@* <form asp-controller="Alumno" asp-action="SaveEditAlumno" method="post"> *@
+    <div class="row">     
+        <div class="form-group col-md-2">
+            <label >Libro</label>
+            <input asp-for="alumno.Libro" type="text" class="form-control" value="@Model.alumno.Libro" required >
+        </div>
+        <div class="form-group col-md-2">
+            <label >Folio</label>
+            <input asp-for="alumno.Folio" type="text" class="form-control" value="@Model.alumno.Folio" required >
+        </div>
+        @* <div class="form-group col-md-4">
+            <label>Nombre</label>
+            <input asp-for="alumno.Persona.Nombre" type="text" class="form-control" value="@Model.alumno.Persona.Nombre" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Apellido</label>
+            <input asp-for="alumno.Persona.Apellido" type="text" class="form-control" value="@Model.alumno.Persona.Apellido" required>
+        </div> *@
+    </div>
+    <br>
+@*
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label >Tipo de documento</label>
+            <select asp-for="alumno.Persona.TipoDocumento.Id" type="text" class="form-control" required >
+                <option selected>Seleccione</option>
+                    @if (Model.Save == true)
+                    {
+                        <option selected >Seleccione</option>
+                        @foreach (var tipoDocumento in @ViewBag.tipoDocumentos)
+                        {
+                            <option value="@tipoDocumento.Id">@tipoDocumento.Cadena</option>
+                        }
+                    }
+                    else
+                    {
+                        <option selected>@Model.alumno.Persona.Nacionalidad.Cadena</option>
+                        @foreach (var tipoDocumento in @ViewBag.tipoDocumentos)
+                        {
+                            @if (@Model.alumno.Persona.TipoDocumento.Id != tipoDocumento.Id)
+                            {
+                                <option value="@tipoDocumento.Id">@tipoDocumento.Cadena</option>
+                            }
+                        }
+                    }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label >Documento</label>
+            <input asp-for="alumno.Persona.NroDocumento" type="text" class="form-control" required >
+        </div>
+        <div class="form-group col-md-3">
+            <label>Fecha de nacimiento</label>
+            <input asp-for="alumno.Persona.Nacimiento" type="date" class="form-control" required>
+        </div>   
+        <div class="form-group col-md-3">
+            <label >Nacionalidad</label>
+            <select asp-for="alumno.Persona.Nacionalidad.Id" type="text" class="form-control" required >
+                    @if (Model.Save == true) {
+                        <option selected>Seleccione</option>
+                    }
+                    else {
+                        <option selected>@Model.alumno.Persona.Nacionalidad.Cadena</option>
+                    }
+                    @foreach (var nacionalidad in @ViewBag.localidades)
+                    {
+                        @if (@Model.alumno.Persona.Nacionalidad.Id != nacionalidad.Id)
+                        {
+                            <option value="@nacionalidad.Id">@nacionalidad.Cadena</option>
+                        }
+                    }
+            </select>
+        </div> 
+    </div>
+    <br>
+
+    <h2>Domicilo</h2>
+
+    <div class="row">
+        <div class="form-group col-md-5">
+            <label>Localidad</label>
+            <select asp-for="alumno.Persona.Domicilio.Localidad.Id" type="text" class="form-control" required>   
+                @if (Model.Save == true)
+                {
+                    <option selected>Seleccione</option>
+                    @foreach (var localidad in @ViewBag.localidades)
+                    {
+                        <option value="@localidad.Id">@localidad.Cadena</option>
+                    }
+                }
+                else
+                {
+                    <option selected>@Model.alumno.Persona.Domicilio.Localidad.Cadena</option>
+                    @foreach (var localidad in @ViewBag.localidades)
+                    {
+                        @if (@Model.alumno.Persona.Domicilio.Localidad.Id != localidad.Id)
+                        {
+                            <option value="@localidad.Id">@localidad.Cadena</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Calle</label>
+            <input asp-for="alumno.Persona.Domicilio.Calle" type="text" value="@Model.alumno.Persona.Domicilio.Calle" class="form-control" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Altura</label>
+            <input asp-for="alumno.Persona.Domicilio.Altura" type="text" value="@Model.alumno.Persona.Domicilio.Altura" class="form-control" required>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="form-group col-md-5">
+            <label>Depto</label>
+            <input asp-for="alumno.Persona.Domicilio.Departamento" type="text" value="@Model.alumno.Persona.Domicilio.Departamento" class="form-control" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Piso</label>
+            <input asp-for="alumno.Persona.Domicilio.Piso" type="text" value="@Model.alumno.Persona.Domicilio.Piso" class="form-control" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Codigo Postal</label>
+            <input asp-for="alumno.Persona.Domicilio.CodigoPostal" type="zip" value="@Model.alumno.Persona.Domicilio.CodigoPostal" class="form-control" required>
+        </div>
+    </div>
+    
+    <br>
+    <div class="form-group">
+        <textarea asp-for="alumno.Persona.Domicilio.observacionDomicilio" placeholder="Observaciones de Domicilio..." class="form-control" rows="4">@Model.alumno.Persona.Telefono1</textarea>
+    </div>
+    <br>
+    
+    <h2>Contacto</h2>
+
+    <div class="form-group col-md-6">
+        <label>Correo electronico</label>
+        <input asp-for="alumno.Persona.Mail" type="email" value="@Model.alumno.Persona.Mail" class="form-control" required>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Telefono</label>
+            <input asp-for="alumno.Persona.Telefono1" type="text" value="@Model.alumno.Persona.Telefono1" class="form-control" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Telefono adicional</label>
+            <input asp-for="alumno.Persona.Telefono2" type="text"  value="@Model.alumno.Persona.Telefono1" class="form-control">
+        </div>
+    </div>
+    <br>
+
+
+    @if (@Model.Save == true)
+    {
+        <input type="submit" class="btn btn-primary" value="Registrar alumno">
+    }
+    else
+    {
+        <div class="row">
+            <div class="form-group col-md-4">
+                <input type="submit" class="btn btn-primary" value="Guardar cambios">
+            </div>
+            <div class="form-group col-md-3">
+                <a asp-controller="Alumno" asp-action="Index" class="btn btn-secundary" value="Carcelar"></a>
+            </div>
+        </div>  
+    }
+</form> *@

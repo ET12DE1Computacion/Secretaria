@@ -25,6 +25,7 @@ namespace Secretaria.Repository
         {
             this.context.Set<T>().Remove(id);
         }
+        
 
         // Check
         public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>> condition,
@@ -66,7 +67,6 @@ namespace Secretaria.Repository
                 result = include(result);
 
             return result.ToList();
-
         }
 
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> include)

@@ -52,5 +52,21 @@ namespace Secretaria.Domain.Escuela
 
             AptoMedicos = new List<AptoMedico>();
         }
+        // public void Edit(Persona persona, short libro, byte folio, int nroDocumento, byte idTipoDocumento)
+        // {
+            // this.Persona = persona;
+            // this.Libro = libro;
+            // this.Folio = folio;
+            // this.NroDocumento = NroDocumento;
+            // this.IdTipoDocumento = idTipoDocumento;
+        // }
+        public void Edit(Alumno alumno)
+        {
+            this.Persona = alumno.Persona;
+            this.Libro = alumno.Libro;
+            this.Folio = alumno.Folio;
+            this.NroDocumento = alumno.NroDocumento;
+            this.IdTipoDocumento = alumno.IdTipoDocumento;
+        }
     }
 }

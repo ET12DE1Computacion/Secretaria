@@ -8,6 +8,7 @@ using Secretaria.Domain.Escuela;
 using Secretaria.Domain.DatosPersonales;
 using Secretaria.Repository;
 using Microsoft.EntityFrameworkCore;
+using Secretaria.FrontEnd.Models.Components;
 
 namespace Secretaria.FrontEnd.Controllers
 {
@@ -20,24 +21,25 @@ namespace Secretaria.FrontEnd.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        // [HttpGet]
+        // public async Task<IActionResult> IndexAsync()
+        // {
+        //     ViewBag.alumnos = this.unitOfWork.Alumnos.GetAll(include: I => I
+        //         .Include(x => x.Persona)
+        //             .ThenInclude(x => x.Nacionalidad));
+
+        //     return View("Alumnos");
+        // }
         [HttpGet]
-        public IActionResult Index()
+        public IEnumerable<Alumno> Alumnos()
         {
-            IEnumerable<Alumno> alumnos = this.unitOfWork.Alumnos.GetAll(include: I => I
+             return this.unitOfWork.Alumnos.GetAll(include: I => I
                 .Include(x => x.Persona)
                     .ThenInclude(x => x.Nacionalidad));
-
-            foreach (var alumno in alumnos)
-            {
-                Console.WriteLine($"Nacionalidad: {alumno.Persona.Nacionalidad.Cadena} Id: {alumno.Persona.Nacionalidad.Id}");
-                Console.WriteLine($"Apellido: {alumno.Persona.Apellido}");
-            }
-
-            return View("Index", alumnos);
         }
 
         [HttpGet]
-        public IActionResult RegistrarAlumno()
+        public IActionResult Index()
         {
             IEnumerable<Localidad> localidades = this.unitOfWork.Localidades.GetTs().OrderBy(x => x.Cadena);
             ViewBag.localidades = localidades;
@@ -48,62 +50,82 @@ namespace Secretaria.FrontEnd.Controllers
             IEnumerable<TipoDocumento> tipoDocumentos = this.unitOfWork.TiposDeDocumentos.GetTs().OrderBy(x => x.Cadena);
             ViewBag.tipoDocumentos = tipoDocumentos;
 
-            return View("RegistrarAlumno");
+            return View("Index", Alumnos());
+        }
+
+        [HttpGet]
+        public IActionResult EditarAlumno(string id)
+        {
+            // Alumno esta vacio - Lo esperaba
+            return View("EditAlumno", Alumno(id));
+        }
+
+        [HttpGet]
+        public IActionResult RegistrarAlumno()
+        {
+            // Alumno esta vacio - Lo esperaba
+            Alumno alumno = new Alumno();
+
+            alumno.Folio = 0;
+            alumno.Libro = 0;
+            
+
+            return View("RegistrarAlumno", alumno);
         }
 
         [HttpPost]
-        public IActionResult Registrar(Alumno alumnoTest)
+        public IActionResult SaveEditAlumno(SaveEditModel alumnoOfTest)
         {
+            // SimpleText
+            Localidad localidad = this.unitOfWork.Localidades.GetTs().FirstOrDefault(x => x.Id == alumnoOfTest.alumno.Persona.Domicilio.Localidad.Id);
+            alumnoOfTest.alumno.Persona.Domicilio.Localidad = localidad;
 
-            // Domicilio
-            Domicilio domicilio = new Domicilio();
-            domicilio = alumnoTest.Persona.Domicilio;
+            TipoDocumento tipoDocumento = this.unitOfWork.TiposDeDocumentos.GetTs().FirstOrDefault(x => x.Id == alumnoOfTest.alumno.Persona.TipoDocumento.Id);
+            alumnoOfTest.alumno.Persona.TipoDocumento = tipoDocumento;
+            alumnoOfTest.alumno.IdTipoDocumento = tipoDocumento.Id;
+            alumnoOfTest.alumno.NroDocumento = alumnoOfTest.alumno.Persona.NroDocumento;
 
-            Console.WriteLine(alumnoTest.Persona.Domicilio.Localidad.Id);
-            Localidad localidad = new Localidad();
-            localidad = this.unitOfWork.Localidades.GetTs().FirstOrDefault(x => x.Id == alumnoTest.Persona.Domicilio.Localidad.Id);
-            domicilio.Localidad = localidad;
+            Nacionalidad nacionalidad = this.unitOfWork.Nacionalidades.GetTs().FirstOrDefault(x => x.Id == alumnoOfTest.alumno.Persona.Nacionalidad.Id);
+            alumnoOfTest.alumno.Persona.Nacionalidad = nacionalidad;
 
-            // Persona
-            Persona persona = new Persona();
-            persona = alumnoTest.Persona;
-            persona.Domicilio = domicilio;
-
-            TipoDocumento tipoDocumento = new TipoDocumento();
-            tipoDocumento = this.unitOfWork.TiposDeDocumentos.GetTs().FirstOrDefault(x => x.Id == alumnoTest.Persona.TipoDocumento.Id);
-            persona.TipoDocumento = tipoDocumento;
-            persona.IdTipoDocumento = persona.TipoDocumento.Id;
-
-            Nacionalidad nacionalidad = new Nacionalidad();
-            nacionalidad = this.unitOfWork.Nacionalidades.GetTs().FirstOrDefault(x => x.Id == alumnoTest.Persona.Nacionalidad.Id);
-            persona.Nacionalidad = nacionalidad;
-
-            // Alumno
             Alumno alumno = new Alumno();
+            alumno = alumnoOfTest.alumno;
 
-            alumno = alumnoTest;
-            alumno.Persona = persona;
-            alumno.IdTipoDocumento = persona.IdTipoDocumento;
-            alumno.NroDocumento = persona.NroDocumento;
+            // Curso curso = new Curso();
+            // //curso = this.unitOfWork.Cursos.GetTs().FirstOrDefault(x => x.Anio == 0 && x.Division == 0);
+            // curso = this.unitOfWork.Cursos.GetOne(x => x.Anio == 1 && x.Division == 4);
+            alumno.CursoActual.Division = 0;
+            alumno.CursoActual.Anio = 0;
 
-            Curso curso = new Curso();
-            //curso = this.unitOfWork.Cursos.GetTs().FirstOrDefault(x => x.Anio == 0 && x.Division == 0);
-            curso = this.unitOfWork.Cursos.GetOne(x => x.Anio == 1 && x.Division == 4);
-            alumno.CursoActual = curso;
+            if (alumnoOfTest.Save)
+            {
+                this.unitOfWork.Alumnos.Insert(alumno);
+            }
+            else
+            {
+                this.unitOfWork.Alumnos.GetOne(x => x.Folio == alumnoOfTest.Folio && x.Libro == alumnoOfTest.Libro).Edit(alumno);
+            }
 
-            Console.WriteLine(alumno.Libro);
-            Console.WriteLine(alumno.Folio);
-            // Console.WriteLine(alumno.Persona.Nacimiento);
-            // Console.WriteLine(alumno.Persona.Domicilio.observacionDomicilio);
-
-            Console.WriteLine($"Nacionalidad: {alumno.Persona.Nacionalidad.Cadena} Id: {alumno.Persona.Nacionalidad.Id}");
-            Console.WriteLine($"Localidad: {alumno.Persona.Domicilio.Localidad.Cadena} Id: {alumno.Persona.Domicilio.Localidad.Id}");
-            Console.WriteLine($"Tipo Docuemnto: {alumno.Persona.TipoDocumento.Cadena} Id: {alumno.Persona.TipoDocumento.Id}");
-
-            this.unitOfWork.Alumnos.Insert(alumno);
             this.unitOfWork.SaveChanges();
 
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+
+        public Alumno Alumno(string id)
+        {
+            int Libro = Convert.ToInt32(id.Substring(0, id.IndexOf('-')));
+            int Folio = Convert.ToInt32(id.Substring(id.IndexOf('-') + 1));
+
+            return this.unitOfWork.Alumnos.GetOne(x => x.Libro == Libro && x.Folio == Folio);
+        }
+
+        [HttpGet]
+        public IActionResult EliminarAlumno(string id)
+        {
+            this.unitOfWork.Alumnos.Delete(Alumno(id));
+            this.unitOfWork.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

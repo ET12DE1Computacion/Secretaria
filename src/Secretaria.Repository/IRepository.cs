@@ -11,6 +11,7 @@ namespace Secretaria.Repository
         void Insert(T id);
         void Delete(T id);
         T Get(T id);
+        
         IEnumerable<T> GetTs();
 
         // Check

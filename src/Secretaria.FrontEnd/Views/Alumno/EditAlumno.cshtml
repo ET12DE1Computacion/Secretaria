@@ -1,0 +1,3 @@
+@model Secretaria.Domain.Escuela.Alumno
+
+@await Component.InvokeAsync("SaveEdit", new SaveEditModel {Titulo = "Editar Alumno", alumno = Model, Folio = Model.Folio, Libro = Model.Libro, Save = false})
